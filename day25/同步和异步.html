@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* setTimeout(function(){
+            console.log(100);
+        },10)
+        setTimeout(function(){
+            console.log(200);
+        },200)
+        let cur = Date.now();
+        for(let i=0;i<10000000;i++){
+ 
+        }
+        let val = Date.now()- cur;
+        console.log(val); */
+
+        setTimeout(function () {
+            console.log(100);
+        }, 10)
+
+        for (let i = 0; i < 1000000; i++) {
+
+        }
+        setTimeout(function () {
+            console.log(200);
+        },8)
+        console.log(300);
+
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <script>
+        // 1、 call 和 apply 的区别是什么，哪个性能更好一些
+        // call和apply都是Function原型上的方法，都能改变函数的this指向,但是apply需要把函数的参数放到一个数组里
+        // call的性能要比apply好一些，（尤其是传的参数超过三个时），尽量用call
+        // time timeEnd可以测试某一段代码运行的时间,但是不是很准确，只能作为参考
+        // console.time('s');
+        // for(let i=0;i<10;i++){
+
+        // }
+        // console.timeEnd('s');
+
+        //-------------------------------
+        //2、 实现 (5).add(3).minus(2) ，使其输出结果为：6
+
+      /*   function judge(value){
+            value = Number(value);
+           return isNaN(value) ? 0 : value;
+        }
+        function add(value){
+           
+            return this+judge(value);
+        }
+        function minus(value){
+           
+            return this-judge(value);
+        }
+        ['add','minus'].forEach(item=>{
+            Number.prototype[item] = eval(item);
+        
+        })
+        console.log((5).add(3).minus(2)); */
+        // --------------------------
+        // 4. 如何把一个字符串的大小写取反（大写变小写小写变大写），例如 ’AbC' 变成 'aBc' 
+       // let str = 'aBxKre中国ertOJDji';
+       // let ss = str.replace(/[a-zA-Z]/g,(content)=>{
+          /*  console.log(content);
+          return content.toUpperCase() === content ? content.toLowerCase() : content.toUpperCase(); */
+
+         /*  content.charCodeAt()>=65 && content.charCodeAt()<=90 ? content.toLowerCase() : content.toUpperCase();  */
+
+      //  })
+       // console.log(ss);
+       //-------------------------------
+      // 5. 实现一个字符串匹配算法，从字符串 S 中，查找是否存在字符串 T，若存在返回所在位置，不存在返回-1！（如果不能基于indexOf/includes等内置的方法，你会如何处理呢？）
+
+     /*  let str = 'zhufengpeixun';
+      let ss = 'pei';
+      function myIndexOf(value){
+        let reg = new RegExp(value);
+        let res = reg.exec(this);
+        return res?res.index : -1;
+      }
+      String.prototype.myIndexOf = myIndexOf;
+      console.log(str.myIndexOf(ss)); */
+
+       // function myIndexOf(value,index = 0) {
+    //   let length = this.length - value.length + 1;
+    //   let first = value.substr(0,1);
+    //   for(var i =index;i<length;i++){
+    //       if(this[i] === first){
+    //         // 循环的当前项和value的首字符相等了，从当前的索引开始，截取和value相同位数的字符进行比较，
+    //         let a = this.substr(i,value.length);
+    //         if(a === value){
+    //           return i;
+    //         }
+    //       }
+    //   }
+    //   return -1;
+    // }
+    // String.prototype.myIndexOf = myIndexOf;
+    //   console.log(str.myIndexOf(ss,10));  // 7
+    //---------------------------------
+  //example 1
+ /*  var a={}, b='123', c=123;  
+   a[b]='b';// a['123'] = 'b'
+   a[c]='c';  // a[123] = 'c'
+   console.log(a[b]);// 'c'
+   
+   //---------------------
+   //example 2
+   var a={}, b=Symbol('123'), c=Symbol('123');  
+   a[b]='b';
+   a[c]='c';  
+   console.log(a[b]);// 'b'
+   
+  // ---------------------
+   //example 3
+   var a={}, b={key:'123'}, c={key:'456'};  
+   a[b]='b';// a[object Object] = 'b'
+   a[c]='c'; // a[object Object] = 'c'
+   console.log(a[b]);// 'c' */
+   //-----------------------------
+
+   /* let ary = [100,2000,300,400];
+  function myForEach(callback){
+    for(var i=0;i<this.length;i++){
+        callback(this[i],i);
+    }
+   }
+   Array.prototype.myForEach = myForEach;
+   ary.myForEach((item,index)=>{
+    // console.log(1);
+    console.log(item,index);
+   })  */
+      //-----------------------
+      let ary = [100,2000,300,400];
+      function myMap(callback){
+          let ary = [];
+        for(var i=0;i<this.length;i++){
+           let ss = callback(this[i],i)
+           ary.push(ss);
+        }
+        return ary
+      }
+      Array.prototype.myMap = myMap;
+      let res = ary.myMap((item,index)=>{
+          console.log(item,index);
+          return 100;
+      })
+      console.log(res);
+
+   </script>
+</body>
+</html>

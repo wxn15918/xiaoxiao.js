@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var arr = [12,34,true];
+        console.log(arr);
+        // 数组的增删改查
+        // 1、查
+        // console.log(arr[2]);
+        // console.log(arr.length);
+        // console.log(arr[0]);
+        // console.log(arr[arr.length-1]);// 获取最后一项
+
+        // 2、删(可以通过改变length的值改变数组的内容)
+        // 删除数组最后一项
+        arr.length = arr.length-1;
+        console.log(arr);
+        
+        // arr.length = 0;// 清空数组
+        // 3、新增和修改
+        arr[3] = 100;
+        console.log(arr);
+        arr[0] = 200;
+        console.log(arr);
+        
+        
+        
+        
+    </script>
+</body>
+</html>

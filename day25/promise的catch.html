@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 第一个请求成功以后发第二个，第二个成功后发第三个
+        // 在真实项目中，咱们只需要成功，捕获一下失败
+        // catch：捕获到第一个失败，捕获到下面的代码就不执行了
+        // catch一般放到链式的最后
+        // 如果then有失败的回调函数，那catch就不会执行
+        let p1 = new Promise(function(resolve,reject){
+            resolve();
+        })
+        console.log(p1.then(function(){}));
+       /*  p1.then(function(){
+            console.log('成功一');
+            console.log(num);
+        }
+        ).then(function(){
+            console.log('成功二');
+        }
+        ).catch(function(err){
+            // 捕获错误或失败
+            console.log(err); 
+        })*/
+    </script>
+</body>
+</html>

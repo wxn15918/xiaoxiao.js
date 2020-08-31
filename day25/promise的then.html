@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* let newData = [];
+        $.ajax({
+            url: 'list.json',
+            async: true,
+            success: function (data) {
+                newData = data;
+                for (let i = 0; i < newData.length; i++) {
+
+                }
+            }
+        }) */
+
+        let p1 = new Promise(function(resolve,reject){
+          /*   setTimeout(()=>{
+                resolve(100);
+            },2000)
+            $.ajax({
+                url:'',
+                success:function(data){
+                    resolve(data)
+                }
+            }) */
+           //  resolve(100)
+          // console.log(a);
+          reject();
+        })
+        // then:执行了，默认是pending状态，两个函数都不执行
+        // then绑定的函数是异步的，成功第一个函数执行，失败第二个函数执行
+        // resolve执行传递过来的实参，会传给then的形参函数
+        // p.then 的返回值是Promise的实例，可以链式调用then方法
+        // then返回的promise实例默认从pending到成功，所以第三个then不管执行的是resolve还是reject都是成功状态
+        // 如果在then的回调函数中返回了promise实例，那就会改变下一个then的Promise的状态
+
+        // 1、执行reject 变成失败
+        // 2、该函数中代码报错，但控制台不会报错而是让then的失败函数执行
+
+        p1.then(function(){
+            console.log('成功一');
+            return new Promise(function(resolve,reject){
+                reject();
+            })
+        },function(){
+            console.log('失败一');
+        }).then(function(){
+            console.log('成功二');
+        },function(){
+            console.log('失败二');
+        })
+
+      //  console.log(p1);
+
+
+    </script>
+</body>
+
+</html>

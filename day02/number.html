@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">1111</div>
+    <!-- <script>
+        var a = 10;
+        var c = a;
+
+        console.log(c);
+        const b = 100;
+   
+        console.log(b);
+        
+        
+
+    </script> -->
+
+    <script>
+        // alert(1);
+        // console.log(100)
+
+        // var rem = confirm(100);
+        // console.log(rem);
+        // var res = prompt(1);
+        // console.log(res);
+
+        // var box = document.getElementById('box');
+        // console.log(box);
+        // console.dir(box);
+        
+    //    console.log('23');
+    //    console.log(Number('23'));//23
+    //    console.log(Number('1a2'));//NaN
+    //    console.log(Number(''));//0
+    //    console.log(Number(null));// 0
+    //    console.log(Number(undefined));// NaN
+    //    console.log(Number(true));// 1
+    //    console.log(Number(false));// 0
+       
+       //把对象转数字。首先线调用toString方法，把对象转换成字符串，然后再转数字
+       // 所有对象转字符串都是'[object object]'//
+       // 所有对象转数字都是NaN
+    //    var obj = {
+    //        name:'xiaoMing',age: 18
+    //    };
+    //    console.log(obj.toString());
+    //    console.log(Number(obj));// NaN
+    //    console.log('23' == 23);// true
+    //    console.log(true + null);// 1 
+       
+       // 把每一项全部用toString方法转字符串，然后把每一个字符串和逗号组合成大的字符串，最后转成数字
+       // 空数组转字符串是空字符串
+       let ary = [1,true,false];// '1,true,false' NaN
+
+       var num = [100];
+       console.log(Number(num));// 100
+        
+       // parseFloat(value):从右向左依次提取有效数字，直到遇到非有效数字返回(返回值是数字类型)
+       console.log(parseFloat('123px'));// 123
+       console.log(parseFloat('r123px'));// NaN
+       console.log(parseFloat('3.12.34'));// 3.12
+       console.log(parseFloat(true));// NaN
+       
+       //parseInt():只能取整数
+       console.log(parseInt('3.12'));// 3
+    
+       
+        // isNaN(value):结果是一个布尔值，如果你检测的值是NaN，那就返回true，否则返回false
+        // 如果检测的值不是number类型的值，那要先转number在检测
+        // console.log(isNaN(NaN)); // true
+        // console.log(isNaN(35)); // false
+        // console.log(isNaN(true)); // false
+        // console.log(NaN == NaN); // false
+
+        // var flag = NaN;
+
+        // // console.log(flag == NaN); // false
+        // isNaN(flag) // true
+        // value.toFixed(num):保留要留的小数位
+        var num = 100;
+        console.log(num.toFixed(2));// '100.00'
+        
+       
+       
+    </script>
+</body>
+</html>

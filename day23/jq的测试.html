@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div>1</div>
+  <div>2</div>
+  <div>3</div>
+  <div>4</div>
+  <div id="box">5</div>
+<!-- <script src="./utils.js"></script> -->
+  <script src="./jquery-1.11.3.js"></script>
+  
+  <script>
+    // console.log($('div').get());
+    // console.log($.each()); 
+    // var ss = $.noConflict();
+    // window.$ = 'xxx';
+
+    // console.log($());
+    // console.log($('<div></div>'));
+    // console.log($(box));
+
+
+    // $(function(){}); ==>// $(document).ready(function(){})
+
+    // rootjQuery.ready( selector )
+    // window.onload = function(){}
+    // 等到页面的dom，内容，富媒体全部加载完成之后才会执行
+    // ready等到页面的dom加载完就执行
+    // console.log( $(function(){}));
+
+     // 如果一个页面引用的两个类库，但是都给window赋值一个$属性，人家jq为了避免这样的情况出生，在jq的身上有一个noConflict方法，是专门用来改变$和jQuery的使用权的
+    // console.log($); // 这是JQuery函数
+
+    // let res = $.noConflict(true);
+    // 如果函数执行时不穿参，那仅仅是把$ 的使用权给别人，但是如果传递一个true，那就是把jQuery的使用权也给别人,
+    // 如果把使用权都给别人的话，那咱们只能使用当前函数的返回值了
+
+    // console.log($); // jq把$的使用权给别人了 
+
+
+    // console.log(res);// 代表的是当前的JQURY类
+    // console.log(jQuery);
+    //--------------------------------
+    // $.extend(): 把方法拓展到jq自己身上
+    // $.fn.extend(): 把方法拓展到jq的原型上
+
+    /* $.extend(false,{
+      //如果你的属性名和jq的属性名重名了， 一般不传参数会覆盖，如果不想覆盖，那就在extend执行的时候收个参数穿一个false
+      queryUrlParams:function(){
+
+      },
+      ss:function(){},
+     ajax:function(){
+        console.log(10);
+      }
+    })
+    // console.dir($);
+    console.log($.ajax()); */
+    //-----------------------------------
+    // each
+    $('div').each(function(index,item){
+      console.log(index,item);
+    })
+
+    let ary = [100,200,200,300];
+    let obj = {name:1,age:2}
+    $.each(obj,function(index,item){
+      console.log(index,item);
+      if(item === 1){
+        return false;
+      }
+    })
+  </script>
+</body>
+</html>

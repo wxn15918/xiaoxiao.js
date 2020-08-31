@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // js中的循环就是不停的重复取做一件事
+
+        // 1、 for循环: 初始值、判断条件、累加
+        for (var i = 0; i < 3; i++) {
+            console.log(i);// 0 1 2
+        }
+        console.log(i);// 3
+
+        var ary = [100, 200, 300, 400];
+        for (var i = 0; i < ary.length; i++) {
+            console.log(i);// 0 1 2 3 4
+            console.log(ary[i]);// 100 200 300 400
+        }
+        console.log(i);// 4
+
+        // continue:结束当前循环，进入下一轮循环
+        // break: 结束整个循环
+        for(var i =0;i<3;i++){
+           // break;
+            if(i === 1){
+                continue;
+                // 遇见后下面的代码都不执行了(不要忘了步长累计)
+            }
+            console.log(i);// 0 2
+            break;// i只输出0 
+        }
+        
+    </script>
+</body>
+
+</html>

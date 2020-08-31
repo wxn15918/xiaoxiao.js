@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        #box {
+            width: 800px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            margin: 50px auto;
+            color: orangered;
+            font-size: 20px;
+            font-weight: 400;
+            background: -webkit-linear-gradient(top right, rgba(255, 0, 0, 0.281), rgba(0, 128, 0, 0.274), rgba(255, 255, 0, 0.178));
+        }
+    
+    </style>
+</head>
+<body>
+    <div id="box" >时间到</div>
+    <script>
+    /* 
+    1.你得有一个结束的时间
+    2.得到当前时间和结束时间的时间差
+    3.把时间差转化成用户可以直接观看的格式展示在页面上
+    4.用定时器不短的更新页面上的时间差
+     */
+     let box = document.getElementById('box');
+     let endTime = new Date('2021-7-24 19:05:00'); // 结束的时间
+     let ss = null;
+
+    function num(value){
+        return  value<10 ? '0' + value:value;
+    }
+   function tvb (value){
+   
+        let obj = {
+                0: '星期日',
+                1: '星期一',
+                2: '星期二',
+                3: '星期三',
+                4: '星期四',
+                5: '星期五',
+                6: '星期六'
+            }
+            return obj[value];
+    }
+  
+   let setTime = () =>{
+         let time = new Date();
+        //  let year = time.getFullYear();
+        //  let mouth = time.getMonth()+1;
+        //  let date = time.getDate();
+          let day = time.getDay();
+         // console.log(date);
+         let disTime = endTime - time; // 毫秒级的时间差
+        // console.log(disTime);
+         if(disTime<=0){
+             clearInterval(ss);
+             box.innerHTML ='时间到';
+             return;
+         }
+         let year = Math.floor(disTime/12/30/24/60/60/1000);
+         console.log(year);
+         let mouth = Math.floor(disTime/30/24/60/60/1000);
+         console.log(mouth);
+         let date = Math.floor(disTime/24/60/60/1000)
+        let hour = Math.floor(disTime/1000/60/60); // 获取小时 
+        let min = Math.floor((disTime - hour*60*60*1000)/1000/60); // 获取分
+        let sec = Math.floor((disTime - hour*60*60*1000 - min*60*1000)/1000); // 获取秒
+        let res = num(year) + '年' +num(mouth)+ '月' +num(date)+ '日 ' + tvb(day) + ' ' +num(hour) + ':' + num(min) +':' + num(sec);
+        box.innerHTML = res;  
+     }
+     setTime();
+     ss = setInterval(setTime,1000);
+</script>
+</body>
+</html>

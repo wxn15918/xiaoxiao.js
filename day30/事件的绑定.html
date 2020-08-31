@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">123456</div>
+    <script>
+    // DOM的事件绑定
+    // DOM的0级事件绑定  DOM的2级事件绑定
+
+    // DOM0
+    // 元素.on事件行为 = function(){}
+    /* 
+    DOM0级事件的绑定原理，给元素的私有属性增加方法(赋值)，当用户触发事件行为的时候，浏览器帮我们把给当前的事件行为赋的方法进行执行
+    DOM0级只能给当前同一个事件行为不能够绑定两个方法
+    DOM0级事件绑定默认会有冒泡机制
+
+     */
+    //  box.onclick = function(){
+    //   console.log(1);
+    // }
+    //  box.onclick = function(){
+    //   console.log(2);
+    // }
+    // 如果想给当前元素的某个事件行为移除事件绑定，只需要给当前的事件行为赋值为null即可(DOM0级移除事件)
+   // box.onclick = null;
+   //-------------------------------
+   //   // DOM2级事件绑定通过原型链查找机制，一级一级的找到EventTarget.prototype上的addEventListener并且让次方法执行,他会把给当前元素的某个事件行为绑定的所有方法存放到浏览器默认的事件池中(绑定几个方法，他就会忘事件池中存储几个方法)，当事件行为触发的时候，他会把事件池中绑定的对应的方法依次执行
+   /* box.onclick = function(){console.log(3);}
+   box.addEventListener('click',function(){
+       console.log(1);
+   },false)
+   box.addEventListener('click',function(){
+       console.log(2);
+   },false) */
+   /* function fn1(){console.log(1)}
+   function fn2(){console.log(2);}
+   box.addEventListener('click',fn1,false)
+   box.addEventListener('click',fn2,false);
+   box.addEventListener('click',fn1,false);
+   box.addEventListener('mouseover',fn2,false); */
+   // 给dom2级事件解除绑定的方法
+  // box.removeEventListener('click',fn1,false)
+
+  // 如果给元素的同一个事件行为绑定两次同一个方法(函数)，是绑定不上的，因为往事件池里增加方法的时候他会进行'去重'的机制
+
+  //----------------------------
+  // dom2绑定的特点
+  // 1、先绑定的谁谁就先输出
+  // 2、绑定的函数里的this就是当前元素本身
+  // 3、元素的同一个的事件行为不能绑定同一个方法
+  //--------------------
+  //在IE8及以下不能使用DOM2的事件绑定
+  function fn1(){
+      console.log(1);
+  }
+  function fn2(){console.log(2);}
+  box.attachEvent('onclick',fn1)
+  box.attachEvent('onclick',fn2)
+
+  // attachEvent的特点
+  // 1、方法的绑定和函数的输出顺序的倒着的
+  // 2、函数里的this指向window
+  // 3、元素的同一个事件行为能够绑定同一个方法
+
+   
+    </script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        div {
+            width: 200px;
+            margin: 20px auto;
+            display: flex;
+            /* border: 1px solid black; */
+        }
+
+        span {
+            display: block;
+            width: 60%;
+            height: 20px;
+            line-height: 20px;
+            text-align: center;
+            border: 1px solid black;
+            margin-right: 10px;
+            font-weight: 600;
+            color: orangered;
+        }
+
+        button {
+            display: block;
+            height: 20px;
+            width: 40%;
+            background: orangered;
+        }
+
+        input {
+            display: block;
+            margin: 10px auto;
+        }
+    
+    </style>
+</head>
+<body>
+    <div>
+        <span id="show">放置验证码</span><button id="btn">看不清</button>
+    </div>
+
+    <input type="text" id="input">
+    <script>
+        var show = document.getElementById('show');
+        var btn = document.getElementById('btn');
+        var input = document.getElementById('input');
+        let value = '';
+        function createCode(num = 4){
+           // num = num || 4;
+            let str = '0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
+        
+            
+            for(var i=0;i<num;i++){
+                let index = Math.round(Math.random()*(str.length-1-0)+0);
+                let char = str[index];
+            if(value.indexOf(char) === -1){
+                value += char;
+            }else{
+                i--;
+            }
+            }
+           show.innerHTML = value;
+           value = '';
+        };
+        createCode();
+        btn.onclick = function (){
+            createCode();           
+        };
+        input.onblur = function(){
+            var result = input.value;
+            if(result.toLowerCase == value.toLowerCase){
+                alert('yes');
+            }else{
+                alert('no');
+                return;
+            }
+        }
+   
+    </script>
+</body>
+</html>

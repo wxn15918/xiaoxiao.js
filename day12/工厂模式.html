@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 工厂模式：低耦合（减少代码冗余），高内聚（提高代码复用率）
+        // 工厂模式：把实现某个功能的代码进行封装，与红藕要是想实现这个功能就直接让函数重复执行就好了
+        function create(name,age,sex){
+            let person = {};
+            person.name = name;
+            person.age = age;
+            person.sex = sex;
+            person.country = 'China';
+
+            return person;
+        }
+        let person1 = create('xiaoming',18,'boy');
+        let person2 = create('xiaohe',18,'girl');
+        console.log(person1,person2);
+    </script>
+</body>
+</html>

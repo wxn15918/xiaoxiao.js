@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 堆栈内存的释放
+        //  打开一个浏览器就会形成一个虚拟的栈内存（作用域）
+        // 栈内存：存储变量、基本值、空间地址，为执行代码提供运行环境
+        // 堆内存：就是单纯的存储引用数据类型的值
+        // 函数执行也会开辟私有栈内存
+
+        // 堆内存的释放
+        // var obj = {name:11};
+        // obj = null;
+
+             // 谷歌浏览器的销毁机制：每隔一段时间，就会检查一下当前作用域里的内存，如果发现有堆内存没有被占用，那就被释放了
+        
+
+        // IE和火狐：采用的是计数的规则，如果当前的堆内存的空间地址呗占用一次，就会给当前的堆内存默认加1，如果堆内存的空间被释放一次，那就默认减1，如果浏览器发现某一个堆内存的计数为0，说明当前的堆内存已经不再被占用，这时候就把他释放掉
+
+
+    //  var obj = {name:11}; // af0       0
+    //  var s = obj; // af0
+
+    //  obj = null;
+    //  s = null;
+    //  console.log(s.name);
+
+     //栈内存的释放
+     // 全局站内存的销毁：关闭页面
+     // 私有栈内存的销毁：销毁  不销毁 不立即销毁
+     // 1、销毁：一般函数执行完之后立马销毁
+    //  function fn(){
+    //      console.log(100);
+    //  };
+    //  fn();// 销毁
+     // 2、不销毁：在当前私有栈内存中产生一个引用值，而且被外界所占用
+//      function fn(){
+//          let obj = {name:11};// af0
+//          return obj;
+//      };
+//      let f = fn();// af0 不销毁
+
+     
+//      var num = 100;
+
+// function fn(){
+//   num = [100,200]
+// }
+
+// fn();
+// console.log(num);// 不销毁
+
+
+// function s(){
+//   return {name:11}
+// }
+// s();// 销毁
+// console.log(num);
+
+// function fn(){
+//     let num = 100;
+//     return num;
+// };
+// let f = fn();// 销毁
+//      // 3、不立即销毁：
+//      function fn(){
+//          function f(){
+//              console.log(100);
+//          };
+//          return f;
+//      };
+//      fn();// 销毁
+//      fn()();//不立即销毁 fn执行完成后不能立即销毁，等af0调用完成之后再销毁
+    // var i = 5;
+    // function fn(i){
+    //     return function(n){
+    //         i += 1;
+    //         console.log(n+i);// 4 8 10 
+    //     };
+    // };
+    // var f = fn(1);
+    // f(2);// 销毁
+    // fn(3)(4);// 不立即销毁
+    // f(7);// 销毁
+    // console.log(i);// 5
+
+
+    var num = 1;
+        var obj = {
+            fn:(function(){
+                var num = 2;
+                return function(n){
+                    console.log( n+(num++) );// 12 23 44
+                }
+            })()
+        }
+        var f = obj.fn;
+        f(10);
+        f(20);
+        console.log(num);// 1
+        obj.fn(40)
+    </script>
+</body>
+</html>

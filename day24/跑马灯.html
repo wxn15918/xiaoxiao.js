@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body,
+        html {
+            height: 100%;
+            width: 100%;
+        }
+
+        .container {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            box-sizing: border-box;
+            margin: 100px auto;
+            overflow: hidden;
+        }
+
+        .container .wrap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 1500px;
+            box-sizing: border-box;
+            display: flex;
+        }
+
+        .wrap .slider {
+            width: 300px;
+            height: 100%;
+
+        }
+
+        .wrap .slider img {
+            height: 100%;
+            width: 100%;
+        }
+        .page{
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 99;
+            border-radius:26px;
+            padding: 5px 5px;
+            box-sizing: border-box;
+            /* background: lightcyan; */
+        }
+        .page li{
+            list-style: none;
+            
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #fff;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+        .page li.active{
+            background-color: lightcoral;
+        }
+        .arrow{
+            width: 20px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    background:red;
+    position: absolute;
+    text-decoration: none;
+    color:white;
+    top:50%;
+    margin-top: -15px;
+            display: none;
+
+        }
+        .arrow.left{
+            left:0;
+        }
+        .arrow.right{
+            right: 0;
+        }
+        .container:hover .arrow{
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="wrap">
+            <div class="slider">
+                <img src="./img/1.jpg" alt="">
+            </div>
+            <div class="slider">
+                <img src="./img/2.jpg" alt="">
+            </div>
+            <div class="slider">
+                <img src="./img/3.jpg" alt="">
+            </div>
+            <div class="slider">
+                <img src="./img/4.jpg" alt="">
+            </div>
+            <div class="slider">
+                <img src="./img/1.jpg" alt="">
+            </div>
+        </div>
+        <!-- 分页器 -->
+        <ul class="page">
+            <li class="active"></li>
+            <li ></li>
+            <li ></li>
+            <li ></li>
+           
+        </ul>
+        <!-- 左右按钮 -->
+        <a href="javascript:;" class="arrow left">&lt</a>
+        <a href="javascript:;" class="arrow right">></a>
+    </div>
+    <script src="./jquery-1.11.3.js"></script>
+    <script>
+        let $cont = $('.container');
+        let $wrap = $('.container .wrap');
+        let $left = $cont.find('.left')
+        let $right = $cont.find('.right')
+        let $page = $cont.find('.page');
+        let $li = $page.find('li');
+
+        let timer = null;
+        let step = 0;
+       // let interval = 3000;
+        //自动轮播
+        function autoMove(){
+            console.log(1);
+            step++;
+            if(step>=5){
+                $wrap.css('left',0);
+                step = 1;
+            }
+            $wrap.stop().animate({
+                left:-step*300
+            },300)
+
+            autoFocus();
+        }
+        timer = setInterval(autoMove,1000);
+        // 自动对焦
+        function autoFocus(){
+            let temp = step;
+            temp===4?temp=0:null;
+            $li.each((index,item)=>{
+
+                
+                let $item = $(item);
+                if(index === temp){
+                    $item.addClass('active');
+                    return;
+                }
+                $item.removeClass('active');
+            })
+        }
+   // 鼠标划入
+        $cont.on('mouseenter',()=>{
+            clearInterval(timer);
+        });
+        // 鼠标划出
+        $cont.on('mouseleave',()=>{
+          timer =  setInterval(autoMove,1000);
+        })
+        // 点击小圆点
+        $li.click(function(){
+            let index = $(this).index();
+            step = index;
+            $wrap.stop().animate({
+                left:-step*300
+            },300)
+            autoFocus();
+        })
+        // 点击右箭头
+        $right.click(autoMove)
+
+        // 点击左箭头
+        $left.click(function(){
+            step--;
+            if(step<0){
+                $wrap.css('left',-4*300);
+                step = 3;
+            }
+            $wrap.stop().animate({
+                left:-step*300
+            },300)
+
+            autoFocus();
+        })
+      
+   </script>
+<!--     <script>
+        let $cont = $('.container');
+        let $wrap = $('.container .wrap');
+
+        let timer = null;// 定时器
+        let index = 0;// 当前展示的图片的索引
+        // 自动轮播
+        function autoMove() {
+            index++;
+            if(index>=5){
+                // 无缝连接：已经运动到克隆的那一张，立即跳到真实的第一张，然后接着运动
+                $wrap.css('left',0);
+                index = 0;
+                index++;
+            }
+            // index=0 -300 index=1 -600
+            
+
+            $wrap.stop().animate({
+               left:-index * 300
+            },300)
+        }
+
+        timer = setInterval(autoMove, 1000)
+    </script> -->
+</body>
+
+</html>

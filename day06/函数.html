@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 函数自调用
+       (function(index){
+           console.log(index);
+       })(123456);// 自己执行一次，因为他没有名字，无法在执行
+
+    //    +function(){}();
+    //    -function(){}();
+    //    ~function(){}();
+    //    !function(){}();
+
+    // 函数表达式
+    var fn = function (){};
+    box.onclick = function (){};
+    </script>
+</body>
+</html>

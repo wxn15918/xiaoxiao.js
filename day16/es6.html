@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // es6:let const
+        // 特点：没有变量提升，不能重复声明，let和大括号可以形成块级作用域，可以解决暂时性死区，在全局作用域下。let声明的变量不会给window增加键值对，const的在创建的是都必须赋值
+
+        // 箭头函数
+        // 特点：没有arguments和this,只有一个形参可以省略形参小括号，如果只return一句代码，可以省略大括号,如果只return {} 一行代码，省略的时候加上小括号,不能作为构造函数使用，函数的形参可以赋默认值
+
+        // let fn = m => ({});
+        // console.log(fn());
+
+        // let fn = n => m => {console.log(100);}
+        // fn()()
+             
+//         function fn(){
+
+// return ()=>{
+//   console.log(this);// obj
+// }
+// }
+
+// let obj = {
+// fn:fn
+// };
+
+// obj.fn()()
+
+// function fn(n = 100){
+//     console.log(n);
+// };
+// fn();
+
+function Create(){
+    // this是实例
+    this.x= 10;
+    this.fn =  () =>{
+        console.log(this);
+    };
+};
+let f = new Create;
+console.log(f);
+f.fn()
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+.pub,
+.box,
+.box .box1 {
+  color: red;
+}
+.box {
+  width: 100px;
+  height: 100px;
+}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 创建正则的方式
+
+
+        //let name = 'wer';
+        // 字面量方式
+        // let reg = /fgh/;
+
+
+        // 用构造函数的方式创建的时候传递的实参是字符串，如果有\，需要转义
+        // let reg = new RegExp('\\d+');
+        // console.log(reg);// /\d+/
+
+       // 向正则里边写变量，只能拿构造函数去创建当前的正则
+        let type = 'test';
+        // let reg = new RegExp('^'+type+'$')// /^test$/
+        let reg = new RegExp(`^${type}$`)
+        console.log(reg);// /^test$/
+
+    </script>
+</body>
+</html>

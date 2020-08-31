@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+            /* 
+      密码：
+        1、6-18位组成
+        2、由数字，字母，下划线组成
+        let reg = /^\w{6,18}$/
+       */
+    //   let str = 'rtyu567&';
+    //    function fn(str){
+          // if(str.length<6 || str.length>18){
+          //   alert('密码不符合规则');
+          //   return;
+          // }
+          // let ary =['r','1','a','_','.....'];
+          // for(var i = 0;i<str.length;i++){
+          //   if(!ary.includes(str[i])){
+          //       alert('密码不符合规则');
+          //       return;
+          //   }
+          // }
+    //       let reg = /^\w{6,18}$/;
+    //       if(!reg.test(str)){
+    //         alert('密码不符合规则');
+    //         return;
+    //       }
+
+    //    }
+    //    fn(str);
+
+// 名字适配
+    //    let reg = /[\u4E00-\u9FA5]{2,6}(·[\u4E00-\u9FA5]{1,6}){0,10}/;
+
+
+    /* 身份证
+    1、18位
+    2、最后一位有可能是x
+    3、前六位：省市区
+    4、7到14位：出生年月日
+    5、最后四位：
+        1、前两位：同年同月生序号
+        2、第三位：奇数是男孩，偶数是女孩
+        3、第四位：有可能是数字，也有可能是x
+     */
+     // 年 1 2 \d{3}
+     // 月 01-12 01-09 10-12 （0[1-9]|1[0-2）
+     // 日 01-31 (0[1-9]|[1-2]\d|3[0-1])
+     // ([0 - 2][1 - 9]) | 10 | 20 | 30 | 31)
+
+    //  let reg = /^\d{17}(\d|x)$/;
+    //    let reg = /^(\d{6})(\d{8})(\d{2})(\d{1})(\d|x)$/
+    //    let reg = /^(?:\d{6})([1-2]\d{3})(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])(?:\d{2})(\d{1})(?:\d|x)$/
+
+     let str = '411302199004013501'
+    
+     function fn(str){
+        let reg = /^(?:\d{6})([1-2]\d{3})(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])(?:\d{2})(\d{1})(?:\d|x)$/;
+        let res = reg.exec(str);
+        console.log(res);
+        // (5) ["411302199004013501", "1990", "04", "01", "0", index: 0, input: "411302199004013501", groups: undefined]
+
+        let sex = res[4] %2 === 0?'女孩':'男孩';
+        if(!res){
+           console.log('对不起，你的身份证号有误，请重新输入');
+           return;
+         }
+         return `你的生日是${res[1]}年${res[2]}月${res[3]}日，你的性别是${sex}`
+     };
+     console.log(fn(str));
+    //  console.log(reg.test(str));
+    //  console.log(reg.exec(str));
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">
+        <p>1111</p>
+    </div>
+    <input type="text" id="inp">
+    <button id="btn">提交</button>
+
+    <script>
+        var box = document.getElementById('box');
+        var inp = document.getElementById('inp');
+        var btn = document.getElementById('btn');
+
+        btn.onclick = function(){
+            var value = inp.value;
+            var p = '<p> ' + value+'</p>';
+            console.log(p);
+            box.innerHTML += p;
+             inp.value = '';
+        }
+
+        
+    </script>
+</body>
+</html>

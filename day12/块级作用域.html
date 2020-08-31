@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 全局作用域、私有作用域、
+        // 块级作用域:let、const和大括号组合就能产生（拥有私有作用域的特点）
+        // if(true){
+        //     let a = 12;
+        // }
+        // console.log(a);// 报错 a is not defined
+        // {
+        //     let a = 13;
+        //     console.log(a);
+        // }
+        // console.log(a);
+        for(let i=0;i<3;i++){
+            console.log(i);// 0 1 2
+        }
+        {
+            {
+                let i = 0;
+                console.log(i);// 0
+            }
+            {
+                let i = 1;
+                console.log(i);// 1
+            }
+            {
+                let i = 2;
+                console.log(i);// 2
+            }
+        }
+        console.log(i);// 报错
+    </script>
+</body>
+</html>

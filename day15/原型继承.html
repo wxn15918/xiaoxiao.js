@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function A(){
+            getX = function (){
+                console.log(100);
+            };
+        };
+        A.prototype.getY = function (){
+            console.log(200);
+        };
+        function B(){};
+        B.prototype = new A;// 让B的原型指向A的实例，那以后类B的实例就可以继承类A的私有和共有属性
+        let f = new B;
+        f.getY();
+        f.getX();
+    </script>
+</body>
+</html>

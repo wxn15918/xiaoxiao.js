@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        body{
+            height: 100%;
+            width: 100%;
+
+        }
+        ul{
+            position: fixed;
+            right: 100px;
+            bottom: 50px;
+            list-style: none;
+            width: 150px;
+            height: 150px;
+            padding: 10px;
+            box-sizing: border-box;
+            /* background-color: aquamarine; */
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+
+        }
+        li{
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            background-color: aquamarine;
+            border-radius: 50%;
+        }
+        #boll{
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            border-radius: 50%;
+            /* margin-top: -50px; */
+            /* margin-left: -50px; */
+            transform: translateX(-50%);
+            transform: translateY((-50%));
+        }
+    </style>
+</head>
+<body>
+    <div id="boll" style="left:50%; top:50%"></div>
+    <ul>
+        <li class="up">上</li>
+        <li class="down">下</li>
+        <li class="left">左</li>
+        <li class="right">右</li>
+        
+    </ul>
+    <script>
+        let boll = document.getElementById('boll'),
+            up = document.getElementsByClassName('up')[0],
+            down = document.getElementsByClassName('down')[0],
+            left = document.getElementsByClassName('left')[0],
+           
+            right = document.getElementsByClassName('right')[0];
+       left.onclick = function(){
+           console.log(1);
+            let timer = setInterval(() => {
+               let curL = boll.offsetLeft ;
+                curL -= 10;
+                if(curL <= boll.offsetWidth/2){
+                    curL = boll.offsetWidth/2;
+                    clearInterval(timer);
+                    timer = null;
+                }
+                boll.style.left = curL + 'px';
+            },100);
+        }
+
+        let timer = false;
+        right.onclick = function(){
+           
+            setInterval(timer);
+            console.log(1);
+           timer = setInterval(() => {
+                let curL = boll.offsetLeft;
+                console.log(curL);
+                curL =curL+ 10;
+
+                let maxR = document.documentElement.clientWidth - boll.offsetWidth/2;
+                if(curL>=maxR){
+                    curL = maxR;
+                    setInterval(timer);
+                    timer = null;
+                }
+                console.log(curL);
+                boll.style.left= curL + 'px';
+            }, 100);
+        }
+    </script>
+</body>
+</html>

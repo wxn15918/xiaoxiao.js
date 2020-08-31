@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        #box{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+        let box = document.getElementById('box');
+        /* 
+        t: 已经运动过的时间
+        b:begin 起始位置
+        d:duration 总时间
+        c: change 总共需要运动的距离
+         */
+      
+        function linear(t,b,d,c){
+            return t/d*c + b;
+        }
+             /* 
+        curEle:当前需要添加样式的元素
+        target：移动的目标的位置
+        duration：运动的总时间
+        callBack：动画执行完成的回调函数
+      */
+      function move(curEle,target,duration,callBack){
+          // 获取运动样式的初始值
+        let begin = {
+            top:parseFloat(getComputedStyle(box).top),
+            left:parseFloat(getComputedStyle(box).left),
+            width:parseFloat(getComputedStyle(box).width),
+            height:parseFloat(getComputedStyle(box).height)
+        }
+        let change = {};
+        for(let key in target){
+            change[key] = target[key] - begin[key];
+        }
+        let timer = null;
+        let flag = 0;
+        timer = setInterval(()=>{
+            flag += 17;
+            for(let key in change){
+                let cur = linear(flag,begin[key],duration,change[key]);
+                box.style[key] = cur + 'px';
+            }
+            if(flag >= duration){
+                clearInterval(timer);
+                timer = null;
+                callBack();
+            }
+        },17)
+    }
+    move('box',{
+        top:300,
+        left:300,
+        width:300,
+        height:300
+    },3000,()=> alert('动画完成了！'))
+    </script>
+</body>
+</html>

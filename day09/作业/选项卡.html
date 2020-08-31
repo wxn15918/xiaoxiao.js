@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #box{
+            width: 500px;
+            margin: 100px auto;
+         
+        }
+        ul{
+            list-style: none;
+            display: flex;
+            position: relative;
+            top: 1px;
+        }
+        ul li{
+            width: 150px;
+            height: 30px;
+            font-size: 20px;
+            line-height: 30px;
+            cursor: pointer;
+            border: 1px solid yellowgreen;
+            text-align: center;
+            margin-right: 10px;
+        }
+        #box div {
+            width: 100%;
+            border: 1px solid yellowgreen;
+            height: 200px;
+            text-align: center;
+            line-height: 200px;
+            font-size: 30px;
+            font-weight: bold;
+            display: none;
+        }
+        ul li.active {
+            color: orangered;
+            border-bottom-color: #fff;
+        }
+
+        #box div.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="box">
+        <ul id="main">
+            <li class="active">小说</li>
+            <li>电影</li>
+            <li>歌曲</li>
+        </ul>
+        <div class="active">《盗墓笔记》</div>
+        <div>唐人街探案</div>
+        <div>左手指月</div>
+    </div>
+    <script>
+        let box = document.getElementById('box');
+        let list = document.getElementsByTagName('li');
+        let item = box.getElementsByTagName('div');
+        // 封装一个用来变换的函数
+
+         let change= index=> {
+            for(let i=0;i<list.length;i++){
+                // 先清空所有的class属性
+                list[i].className = '';
+                item[i].className = '';
+            }
+            // 给对应的li和div加上class为active属性
+
+            list[index].className = 'active';
+            item[index].className = 'active';
+        }
+        for(let i=0;i<list.length;i++){
+            list[i].index = i;
+            list[i].onclick = ()=> {change(i)};
+            
+        }
+    </script>
+</body>
+</html>

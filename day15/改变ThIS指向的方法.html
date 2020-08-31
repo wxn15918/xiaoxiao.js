@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">123</div>
+    <script>
+        //  'use strict'
+        // let obj = {name:1};
+        // function fn(n,m){
+        //     console.log(this,n,m);
+        // };
+    //     obj.fn = fn;
+    //    obj.fn();
+    //    delete obj.fn;
+    // call apply bind都在Function原型上，所有函数都可以调用
+  //   fn.call(obj)// 把fn当做对象找到所属类原型上的call方法，然后执行
+//   fn.call()
+//   fn.call(undefined)
+//    fn.call(null)
+//   fn.call(obj,2,3)
+
+    //---------------
+    // 严格模式下，call不传参或者传undefined,fn里的this指向都是undefined,如果传null，this就指向null
+    // 非严格模式下，call不传参或者传undefined或者null,this指向都是window
+    // call的第一个实参是this指向，从第二个开始就是fn的正常参数
+// --------------------------
+      //  apply:改变this指向，不同点是传参不一样，apply的第二个参是一个数组或者类数组
+
+    //   let obj = {name:1} 
+    //   function fn(n,m){
+    //       console.log(this,n,m);
+    //   };
+    //   fn.apply(obj,[1,2])
+
+      // ------------------
+      // bind:改变this的指向，但是他的预处理this，提前改变this的指向，并不会让函数执行，bind方法的返回值才是改变this后的函数
+    //   let obj = {name:1} 
+    //   function fn(){
+    //       console.log(this);
+    //   };
+    //  fn = fn.bind(obj);
+    // console.log(res === fn);// false
+    fn();
+
+//     let obj = {name:1}
+//     function fn(){
+//         console.log(this);
+//     };
+//    box.onclick = fn.bind(obj)
+
+// 传参情况
+    // let obj = {name:1}
+    // function fn(n,m){
+    //     console.log(this,n,m);
+    // };
+    // fn = fn.bind(obj);
+    // fn(1,2)
+
+    function fn(){
+            // arguments.slice
+               // 通过[]找到slice方法，然后在用call方法让slice执行，并且把slice的this指向了arguments，那这样slice内部操作this时就是操作的arguments了
+
+        //  console.log( [].slice.call(arguments,0,1) );
+          Array.prototype.push.call(arguments,100);
+            console.log(arguments);  
+            // slice内部的this是arguments
+        }
+        fn(100,200,300,400);
+
+
+        // let ary = [100,200];
+        // console.log(ary.slice(0)); // 克隆数组
+        // slice方法里的this是谁
+        // 谁调用的slice，那slice内部的this就是谁
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        #box {
+            width: 500px;
+            margin: 200px auto;
+            /* border:1px solid black; */
+        }
+
+        ul {
+            list-style: none;
+            display: flex;
+            position: relative;
+            top: 1px;
+        }
+
+        ul li {
+            width: 150px;
+            line-height: 30px;
+            text-align: center;
+            border: 1px solid black;
+            cursor: pointer;
+            margin-right: 5px;
+        }
+
+        #box div {
+            width: 500px;
+            border: 1px solid;
+            height: 200px;
+            text-align: center;
+            line-height: 200px;
+            font-size: 20px;
+            display: none;
+        }
+
+        ul li.active {
+            color: orangered;
+            border-bottom-color: #fff;
+        }
+
+        #box div.active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <ul>
+            <li class="active">郭芙蓉</li>
+            <li>吕轻侯</li>
+            <li>邢育森</li>
+        </ul>
+        <div class="active">他的爸爸是郭巨侠</div>
+        <div>他是一个算账的秀才</div>
+        <div>他是一个当差的捕头</div>
+    </div>
+    <script>
+        // let box = document.getElementById('box');
+        function Select(ele,params = {}) {
+            let {callBack} = params;
+            this.callBack = callBack;
+            this.box = document.getElementById(ele);
+            this.navList = this.box.getElementsByTagName('li');
+            console.log(this.navList);
+            this.tabList = this.box.getElementsByTagName('div');
+            this.flag = 0;
+            this.navListClick();
+        }
+        Select.prototype.navListClick = function () {
+            for (let i = 0; i < this.navList.length; i++) {
+                this.navList[i].onclick = this.change.bind(this, i)
+            }
+        }
+        Select.prototype.change = function (index) {
+           /*  for (let i = 0; i < this.navList.length; i++) {
+                this.navList[i].className = '';
+                this.tabList[i].className = '';
+            } */
+            this.navList[this.flag].className = '';
+                this.tabList[this.flag].className = '';
+            this.tabList[index].className = 'active';
+            this.navList[index].className = 'active';
+           
+            this.callBack && this.callBack(this.flag,index);
+            this.flag = index;
+        }
+        new Select('box',{
+            callBack:function(last,index){
+                console.log(last,index);
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <script>
+    //     var ary = [12, 23]; 
+    // var s = 100;
+    // function fn(ary,s) {
+    //     s = 200;
+    //     ary[0] = 100;
+    //     console.log(ary);//[100,23]
+    //     console.log(s);// 200
+    //     ary = [100];
+    //     console.log(ary); [100]
+    // }
+    // fn(ary,s);
+    // console.log(ary);[100,23]
+    // console.log(s)// 100
+
+// 2、
+
+    // console.log(a); // undefined
+    // console.log(b);// undefined
+    // console.log(c);// undefined
+    // var a, b, c = 10;
+    // console.log(a);// undefined
+    // console.log(b);// undefined
+    // console.log(c);// 10
+
+
+// 3、
+
+    // console.log(a, b);// undefined undefined
+    // var a = 12,
+    //     b = 12;
+    // function fn() {
+    //     console.log(a, b);// undefined 12
+    //     var a = b = 13;
+    //     console.log(a, b);// 13 13
+    // }
+    // fn();
+    // console.log(a, b);// 12 13
+
+
+
+// // 4、
+
+    // var a = 4;
+    // var f = 3;
+    // function b(x,y,a) {
+    //     alert(a); // 3
+    //     // 形参和arguments存在映射关系；
+    //     arguments[2]=10;
+    //     alert(a);// 10
+    // }
+    // a=b(1,2,f);
+    // alert(a);// undefined
+    // console.log(f);// 3
+
+// // 5、
+
+    // fn();// 5
+    // function fn() {
+    //     console.log(1);
+    // };
+    // fn();// 5
+    // function fn() {
+    //     console.log(2);
+    // };
+    // fn();// 5
+    // var fn = function () {
+    //     console.log(3);
+    // };
+    // fn();// 3
+    // function fn() {
+    //     console.log(4);
+    // };
+    // fn();// 3
+    // function fn() {
+    //     console.log(5);
+    // };
+
+
+// // 6、
+
+
+    // var foo='hello';
+    // (function(foo){
+      
+    //     console.log(foo); // 'hello'
+    //     var foo=foo||'world'; 
+    //     console.log(foo); // 'hello'
+    // })(foo);
+    // console.log(foo); // 'hello'
+
+
+// // 7、(自执行函数没有变量提升)
+
+f = function(){return true}
+    g = function(){return false}
+    ~function(){
+        if(g && [] == ![]){
+            f = function(){return false}
+            function g(){return true}
+        }
+    }();
+
+    console.log(f())// true
+    console.log(g())// false
+
+   </script> 
+</body>
+</html>

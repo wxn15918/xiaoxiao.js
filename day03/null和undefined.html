@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    //    null undefined 都是代表没有
+    //   null :一般情况下都是意料之中的事,以后可能出现
+    //     新车没油
+      var carBox = null;
+      var carBox = 'full';
+
+      var total = null;// total代表两个数的值
+      var a = 10;
+      var b = 12;
+      total = a + b;
+      console.log(total);// 22
+      
+      // undefined: 一般都是意料之外的事，浏览器默认机制导致的,以后也不会出现
+        var monkey = {
+            name: 'sunWuKong',
+            age:null
+        }
+        monkey.father;// undefined
+        // ''占一点内存，null不占内存
+    </script>
+
+</body>
+</html>

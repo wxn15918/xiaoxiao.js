@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // let ary = [100,200,300,400];
+        // console.log(ary.push(500,600));// 6
+        // console.log(ary);
+
+        // let ary = [100,200,300,400];
+        // console.log(ary.unshift(500,600));// 6
+        // console.log(ary);
+
+       
+        // let ary = [100,200,300,400];
+        // console.log(ary.pop());// 400
+        // console.log(ary);// [100,200,300]
+
+
+        // let ary = [100,200,300,400];
+        // console.log(ary.shift());// 100
+        // console.log(ary);// [200,300,400]
+
+     //   let ary = [100,200,300,400];
+        // console.log(ary.splice());// []
+        // console.log(ary);// [100,200,300,400]
+
+        //console.log(ary.splice(2));// [300,400]
+        // console.log(ary.splice(10));// []
+        // console.log(ary);// [100,200]
+
+        //console.log(ary.splice(1,2));[200,300]
+        //console.log(ary);// [100,400]
+        // console.log(0);// 清空数组
+        // console.log(ary.splice(0,1));// 删除数组开头
+        // console.log(ary.shift());
+
+
+        // console.log(ary.splice(ary.length-1));
+        // console.log(ary.splice(-1,1));// 删除数组末尾
+        // console.log(ary.splice(ary.length-1),1);
+        // console.log(ary.length--);
+        // console.log(ary.length-=1);
+        // console.log(ary.pop());
+
+         // 4.传3个参：n,m,x:从索引n开始，删除m个，用x进行替换
+    //  let ary = [100, 200, 300, 400];
+      // ary.splice(1,1,600,900,800) // [200] (修改)
+      // console.log(ary); // [100, 600, 900, 800, 300, 400]
+
+      // 5. n,0,x:从索引n开始删除0个，把x放到索引n对应值的前面
+    //   ary.splice(1,0,600);
+    //   ary.splice(0,0,600); // 给数组开头增加
+    //   ary.unshfit()
+
+    //   ary.splice(ary.length,0,600) // 数组末尾新增
+
+    //   把600放到300的后面
+    //   ary.splice(2+1,0,600)
+
+    //   console.log(ary);
+
+        // 1.不传参
+   // let ary = [100, 200, 300, 400];
+    // console.log(ary.slice());// [100,200,300,400] 克隆
+    // console.log(ary);// [100,200,300,400]
+          // 2.传一个参数n：从索引n开始截取到末尾
+    // console.log(ary.slice(2));// [300,400] 
+    // console.log(ary);// [100,200,300,400]
+    //       // 3.传两个参数n,m:从索引n开始，截取到索引m，而且不包含m对应的那一项
+    // console.log(ary.slice(1,2));// [200] 
+    // console.log(ary);// [100,200,300,400]
+
+
+         // 需求：截取 200,300,400
+       //  ary.slice(1) // [200,300,400]
+
+        //  let ary = [100,200,300,400];
+        //  console.log(ary.concat([600,700]));// [100,200,300,400,600,700]
+        //  console.log(ary.concat(true,null));// [100,200,300,400,true,null]
+
+        //  console.log(ary);// [100,200,300,400]
+
+
+       // let ary = [100,200,300,400];
+        // console.log(ary.join('$'));// '100$200$300$400'
+        // console.log(ary.join('+'));// '100+200+300+400'
+        // console.log(ary.join());// '100,200,300,400',如果不传参，默认是用逗号分隔
+        // console.log(ary.join(''));// '100200300400'
+
+       // eval:可以把字符串转化成js运算式
+    //    console.log(eval('100+200+300+400'));// 1000
+
+    //    function fn(){
+    //        console.log(100);
+    //    };
+    //    eval('fn()');
+
+    //    console.log(eval(ary.join('+')));// 1000
+
+    // let ary = [23,56,21,12,73];
+    // console.log(ary.reverse()); // [73,12,21,56,23]
+    // console.log(ary);// [73,12,21,56,23]
+    // reverse函数的返回值个ary是一个堆内存
+
+  
+         let ary = [3,4,5,1,2,3,4,7,4];
+      console.log(ary.sort());
+      console.log(ary);
+      // 如果排序的时候不传参，那只能给个位数的值进行从小到大排序
+
+        // let ary = [7,111,22,11,9];
+        // console.log(ary.sort(function(a,b){
+        //    //  console.log(a,b);
+        //     return a -b;// 从小到大排列
+        //    // return b -a;// 从大到小排列
+        // }));
+    </script>
+
+</body>
+</html>

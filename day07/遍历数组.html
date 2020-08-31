@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    //    forEach:
+    //    含义：遍历数组
+    //    参数：函数
+    //    返回值：undefined
+    //    原数组不变
+    var ary = [34,12,23,33,22];
+    console.log(ary.forEach(function(item,index){
+        // 你的数组有多少项，当前这个函数就会执行多少次
+        // item 代表数组的每一项
+        // index 代表每一项的索引
+        console.log(item,index);
+    }));
+
+    //    map:
+    //    含义：遍历数组
+    //    参数：函数
+    //    返回值：一个新的数组
+    //    原数组不变
+    var ary = [34,12,23,33,22];
+    console.log(ary.map(function(item,index){
+        // 你的数组有多少项，当前这个函数就会执行多少次
+        // item 代表数组的每一项
+        // index 代表每一项的索引
+        console.log(item,index);
+        return item+1;
+    }));
+    
+    </script>
+</body>
+</html>

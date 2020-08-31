@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="box er gh"></div>
+    <div class="enter"></div>
+    <h1 class="box"></h1>
+    <script>
+        let elements = document.body.getElementsByTagName('*');
+
+        function $attr(key, value) {
+            let ary = [];
+            elements = Array.from(elements);
+            elements.forEach(item => {
+                let itemValue = item.getAttribute(key);
+                if (key === 'class') {
+                    /*  let reg = new RegExp('\\b' + value + '\\b');
+                        if(reg.test(itemValue)){
+                            ary.push(item);
+                        } */
+                        itemValue && (itemValue = itemValue.split(' '));
+          /* //['w','word','name']
+          itemValue && (itemValue.includes(value) ? ary.push(item) : null); */
+                    if (itemValue) {
+                        itemValue.includes(value) ? ary.push(item) : null;
+                    }
+                } else {
+                    itemValue === value ? ary.push(item) : null;
+                }
+            })
+            return ary;
+
+        }
+        let ary = $attr('class', 'box');
+        console.log(ary);
+    </script>
+</body>
+
+</html>

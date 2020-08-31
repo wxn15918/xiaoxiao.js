@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .container{
+            margin: 20px auto;
+            width: 200px;
+        }
+        
+        .box{
+            float: right;
+            width: 100px;
+            height: 35px;
+            line-height: 35px;
+            text-align: center;
+            font-size: 16px;
+            border: 1px solid #aaa;
+            /* position: relative; */
+        }
+         .show{
+            /* position: absolute;
+            top: 35px;
+            right: 0px; */
+            float: right;
+            width: 200px;
+            height: 70px;
+            line-height: 70px;
+            text-align: center;
+            font-size: 14px;
+            border: 1px solid #aaa;
+            margin-top: -1px;
+            /* display: none; */
+        }
+        /* .box:hover .show{
+            display: block;
+        } */
+    </style>
+</head>
+<body>
+   <!-- <div class="box">
+       <span>购物车</span>
+       <div class="show">
+           暂无购物车内容
+       </div>
+   </div>  -->
+   <div class="container clearfix">
+    <div class="box"><span>购物车</span></div>
+        
+        <div class="show"> 暂无购物车内容</div>
+           
+        
+   </div>
+ <script>
+     let box = document.querySelector('.box');
+     let show = document.querySelector('.show');
+    /*  box.onmouseout = function(e){
+        show.style.display = 'none';
+     }
+    box.onmouseover = function(e){
+        show.style.display = 'block';
+     }
+     show.onmouseover = function(e){
+        show.style.display = 'block';
+     }
+     show.onmouseout = function(e){
+        show.style.display = 'none';
+     } */
+
+     /* document.onmouseover = function(e){
+        console.log('ok');
+        let target = e.target;
+        if(target.tagName === 'SPAN'){
+            target = target.parentNode;
+        }
+        if(/^(box|show)$/.test(target.className)){
+            show.style.display = 'block';
+            return;
+        }
+        show.style.display = 'none';
+     } */
+
+
+     document.onclick = function(e){
+        /* console.log('ok');
+        let target = e.target;
+        if(target.tagName === 'SPAN'){
+            target = target.parentNode;
+        }
+        if(/^box$/.test(target.className)){
+            show.style.display = 'block';
+            return;
+        } */
+        /* if(/^show$/.test(target.className)){
+            return;
+        } */
+        show.style.display = 'none';
+    }
+    box.onclick = function(e){
+        show.style.display = 'block';
+        e.stopPropagation();
+    }
+    show.onclick = function(e){
+        e.stopPropagation();
+    }
+
+
+ </script>
+</body>
+</html>

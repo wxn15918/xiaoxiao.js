@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // && 逻辑与，并且 val && val,前面是true,取后边，否则取前面
+        // || 逻辑或，或者 val || val，前面是true,取前面，否则取后面
+        // % 取余（模）
+        // +=/ -= : 累加、累减
+        // i++ / i-- : 后置自增运算符，先取值后运算(累加一)
+        // ++i / --i ：前置自增运算符,先运算再取值
+
+        // var num = 1 && 2;
+        // console.log(num); // 2
+        
+        // var num1 = 0 && 2;
+        // console.log(num1);// 0
+
+        // var num2 = 1 && 2 && 3 && 'haha' ;
+        // console.log(num2);// 'haha'
+
+        // var num3 = 1 && NaN && 3 && 4 && 5;
+        // console.log(num3);// NaN
+        
+        var num = 0 || NaN;
+        console.log(num);// NaN
+
+        var num1 = 0 || NaN || '' || 'haha';
+        console.log(num1);// 'haha'
+        
+        var num2 = 0 && 1 || '' && NaN;// 先算逻辑与再算逻辑或
+        console.log(num2);// ''
+        
+        console.log(5 % 3);// 2
+        console.log(4 % 2);// 0
+        
+        var num = 1;
+        num += 1;// 在之前的基础上累加1
+        console.log(num);// 2
+        
+        var num = 5;
+        num -= 4;
+        console.log(num);// 1
+
+        let ary = [100,200,300,400];
+        ary.length -= 1;
+        console.log(ary);// [100,200,300]
+        
+        var i = 5;
+        console.log(i++);// 5
+        console.log(i);// 6
+        
+        var n =5;
+        console.log(n--);//5
+        console.log(n);// 4
+        
+        var i = 5;
+        console.log(++i);// 6
+        console.log(i);// 6
+        
+        var m = 5;
+        var num = (m++) + (--m);
+        console.log(num);// 10
+        console.log(m);// 5
+        
+        
+        
+    </script>
+</body>
+</html>

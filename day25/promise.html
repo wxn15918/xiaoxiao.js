@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // Promise:es6新增的,是一个函数,类,必须传一个函数
+       //  console.log(Promise);
+       // p1是Promise的实例
+        // pending ==> fulfilled(从等待到成功) pending ==> rejected(从等待到失败)
+        // 在promise中，一旦状态发生变化，就会凝固，状态就不会再发生改变
+        // promise中的then是异步的
+        // resolve和reject也是函数
+       let p1 = new Promise(function(resolve,reject){
+        console.log(111);// 这个函数执行了
+        // 这个函数是同步的，这个代码不执行完，不会执行下面的代码
+        setTimeout(()=>{
+            resolve(100);// 执行后状态由pending变成成功状态
+        },1000)
+       
+        reject(100);// 让promise变成失败状态
+       });
+       console.log(p1);// {}，默认是pending状态
+    </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var fn = function(){
+            console.log(100);
+        }
+
+        var fn = ()=>{
+            console.log(100);
+        }
+        fn();
+        // 如果只有一个参数，可以省略小括号
+        // var ss =  num=>{
+        //     console.log(num);
+        // }
+        // ss(300);
+        // 如果箭头函数里只有return一行代码，可以省略return和函数的大螺号
+
+        var dd = ()=>300;
+        console.log(dd(300));
+
+        var fn = ()=>{
+            return ()=>{
+                console.log(100);
+            }
+        }
+         let f =fn();
+         f()
+         function addZero(value) {
+    
+    return value < 10 ? '0' + value : value;
+  };
+
+  var addZero = value=> value < 10 ? '0' + value : value;
+
+
+  var sum = (...arg)=>{
+      var total = null;
+      arg.forEach((item,index)=>{
+          var cur = Number(item);
+          if(!isNaN(cur)){
+              total += cur;
+          }
+      })
+      return total;
+  }
+console.log(sum(true,null,undefined,'12'));//13
+
+
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // console.log(String(true));// 'true'
+        // console.log((100).toString());// 100
+        // null.toString();// 报错
+        // console.log(String(null));// 'null'
+
+       // 四则运算
+        // 在运算的过程中如果发现当前的值不是number类型的，要先转换为number类型的值，然后再运算,如果在运算过程中出现NaN,那最后的结果就是NaN
+
+        console.log(true + true - false + null);
+        console.log(true + 2 + undefined + null);
+        
+        //在加法运算的过程中会出现两种情况
+            // 就是正常运算
+            // 字符串拼接：在加法运算过程中一旦出现加好和引号相遇了
+                // 如果是基本值拼接,不会进行数据转换
+            console.log('true' +1);// 'true1'
+            
+        console.log(1+ true + undefined + null + true + 'er');
+        console.log(35 + 678 + undefined - true + 'erya' + true + undefined);// NaNeryatrueundefined
+        // 
+        console.log(1 + []);// '1'
+          // console.log({} + {});
+        // 在拼接的时候如果拼接的基本值不需要类型转换，如果是引用值，转换为字符串在拼接
+        // '[object Object]' + {}
+        // '[object Object]' +'[object Object]'
+        // '[object Object][object Object]'
+
+        console.log(1 + undefined + {} + true + [1]);
+        //            NaN +{}--> NaN + '[object Object]'-->'NaN[object Object]'
+        // 'NaN[object Object]' + true-->'NaN[object Object]true'
+        // 'NaN[object Object]true' + [1]-->'NaN[object Object]true' + '1'-->'NaN[object Object]true1'
+
+        
+    </script>
+</body>
+</html>

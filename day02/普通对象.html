@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <script>
+       var obj = {
+           name:'xiaoMing',
+           age:18,
+           sex:'男',
+           3:true,
+           ss:null
+       }
+
+       // 对象的增删改查
+       //1、 查（获取对象中属性名对应的属性值）
+                // 对象名.属性名 (不必加引号)
+                // 对象名['属性名'] （必须加引号,如果是数字加不加引号都行）
+                // 如果属性名是数字，必须使用 对象名['属性名'] 来获取
+                console.log(obj.name);
+                console.log(obj['name']);
+                console.log(obj['3']);
+                
+              // 2、新增和修改
+              // 对象名.属性名 = xxx  
+              // 如果属性名存在就是修改，如果不存在就是新增
+                obj.sex='女';
+                obj['aa'] = 'wo';
+                console.log(obj);
+                
+                // 3、删除
+                    // 假删除：手动给当前需要删除的键值对赋值为null
+                    obj.name = null;
+                    console.log(obj);
+                    
+                    // 真删除
+                    delete obj.name;
+                    console.log(obj);
+
+                    var age = 'sex';
+                    console.log(obj[age]);//把age的值拿过来用
+                    
+                    
+                    
+                
+   </script> 
+</body>
+</html>

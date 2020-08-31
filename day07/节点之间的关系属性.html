@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="box">
+        <li id="span"></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <script>
+        // 页面中节点之间的关系属性
+        // 页面的所有东西都是由节点组成的，元素z还是节点的一种，叫做元素节点
+        // 所有节点都是对象数据类型的
+        // 元素节点 标签  nodetype：1     nodeName:大写的标签名  nodeValue:null
+        // 文本节点 内容、空格、回车 3      #text                文本内容
+        // 注释节点 注释           8        #comment            注释内容
+        // 文档节点 文档           9       #document            null
+
+
+        // childNodes:获取所有的子节点
+        // children:获取所有的元素子节点,IE8及以下不兼容
+        // firstElementChild:获取第一个子元素节点
+        // lastElementChild:获取最后一个子元素节点
+        // firstChild:获取第一个子节点,获取不到是null
+        // lastChild:后去最后一个子节点
+
+        // previousSibling:获取上一个兄弟节点
+        // nextSibling:获取下一个兄弟节点
+
+        // previousElementSibling:获取上一个兄弟元素
+        // nextElementSibling:获取下一个兄弟元素
+
+        // parentNode:获取父节点
+        var box = document.getElementById('box');
+        var span = document.getElementById('span');
+        console.log(box.childNodes);// 节点集合（类数组），获取不到是[]
+        console.log(box.children);
+        console.log(box.firstChild);
+        console.log(box.lastChild);
+        console.log(box.firstElementChild);
+        console.log(box.lastElementChild);
+        console.log(box.previousSibling);
+        console.log(box.nextSibling);
+        console.log(span.parentNode.parentNode.parentNode.parentNode.parentNode); // div-->body-->html-->document-->null
+
+    </script>
+</body>
+</html>

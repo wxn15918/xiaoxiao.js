@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function sum(){
+            console.log(arguments);// 类数组,函数的实参集合
+            var total = 0;
+            for(var i =0;i<arguments.length;i++){
+               // console.log(i);//  0 1 2 3 4
+               // arguments[i]：代表每一个实参
+                total +=arguments[i];
+            }
+            return total;
+            
+        }
+       console.log(sum(12,13,11,13,14));
+       
+       console.log(sum(20,30,50));
+       
+    </script>
+</body>
+</html>

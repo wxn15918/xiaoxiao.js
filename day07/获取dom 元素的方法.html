@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="box">
+        <li id="a" class="ss">1</li>
+        <li class="ss">2</li>
+        <li class="ss">3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+    <script>
+        // document.getElementById('id名')：通过id名获取元素，是一个元素对象，没有就是null
+        // context.getElementsByTagName('标签名')：在指定的上下文中获取一组元素，是伪数组,如果获取不到是空元素集合
+        // context.getElementsByClassName('类名')：在指定的上下文中获取一组元素，是伪数组，如果获取不到是null
+
+        // context.querySelector('选择器')：通过css选择器获取一个元素对象，获取不到就是null
+        // context.querySelectorAll('选择器')：通过css选择器获取一组元素，获取不到就是[]
+        // document.documentElement:获取html
+        // document.body:获取body
+        // document.head:获取头部
+        console.log(box);// 浏览器支持通过id名直接使用当前对应的元素
+        context.querySelector('#box');
+    </script>
+</body>
+</html>

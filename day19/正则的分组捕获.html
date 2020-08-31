@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // let reg = /^(?:\d{6})(\d{8})(\d{2})(\d{1})(?:\d|x)$/;
+        // let str = '411302154634563501';
+        // console.log(reg.exec(str)); 
+        //正则的分组捕获
+    // 1、返回值是一个数组(如果捕获不到就是NULL)
+    //     1、第一项：当前捕获的内容
+    //     2、   其余项：每一个小分组捕获的内容
+    //     3、index：当前捕获的内容的索引
+    //     4、input:源字符串
+    //  2、如果设置了分组，但是只是想改变匹配的优先级，并不想捕获，可以给小分组的开头加上 ?:来设置只匹配不捕获
+
+    // ------------------------------
+
+    let str = '{0}年{1}月{2}日';
+    let reg  = /\{(\d)\}/g;
+    // console.log(reg.exec(str));
+    // console.log(reg.exec(str));
+    // console.log(reg.exec(str));       
+
+    // console.log(str.match(reg));
+    // 如果加上g，那match只能捕获到每一次大正则匹配的内容，捕获不到小分组匹配的内容
+    // 如果不加g，exec和match捕获的结果一致
+
+   // console.log(str.matchAll(reg));
+
+//    let bigAry = [];
+//    let smallAry = [];
+//     for(var ss of str.matchAll(reg)){
+//         console.log(ss);
+//         // let {$1,$2} = ss;
+//         bigAry.push(ss[0]);
+//         smallAry.push(ss[1]);
+//     }
+//     console.log(bigAry,smallAry);
+//-------------------------------------
+
+    // 封装一个方法，用来实现得到当前每一次捕获的大内容和分组捕获的小内容
+
+//     function myMatch(str){
+
+// }
+// String.prototype.myMatch = myMatch;
+
+// console.log(str.myMatch(reg)); 
+ // {
+//   bigAry:['{0}','{1}','{2}'],
+//   smallAry:['0','1','2']
+// }
+//---------------------------------------
+  // 正则的贪婪性
+  let str = 'wer202tyui2018op';
+  let reg = /\d+?/g;
+  // console.log(reg.test(str));// true
+  // 正则的贪婪性==>默认请情况下，正则捕获的时候是按照当前正则所匹配的最长的字符来捕获的
+  console.log(str.match(reg));
+  // ["202", "2018"] 这是带有贪婪性的
+  // ["2", "0", "2", "2", "0", "1", "8"] 这是取消贪婪性的
+  // ==>在量词元字符后面加?就可以取消捕获时的贪婪性(按照匹配的最短的字符来获取)
+  // 利用正则的匹配test实现捕获
+  //  let str = '{0}年{1}月{2}日';
+  //  let reg = /\{(\d)\}/g;
+//----------------------------
+  // // 利用test匹配的时候，每匹配一次就会给正则类的$1~$9增加当前分组捕获的内容
+  // // $&:是每一次捕获的大内容
+  //  console.log(reg.test(str));
+  //  console.dir(RegExp)
+  //  console.log(RegExp.$1); // '0'
+  //  console.log(reg.test(str));
+  //  console.dir(RegExp)
+  //   console.log(RegExp.$1); // '1'
+  //  console.log(reg.test(str));
+  //  console.log(RegExp.$1); // '2'
+
+
+    </script>
+</body>
+</html>

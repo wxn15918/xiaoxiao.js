@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <script>
+       // 正则原型上的方法
+       // test:匹配
+       // exec:捕获
+
+       // 字符串原型上的方法
+       // replace
+       // match
+       // matchAll
+    /* 
+    正则的捕获
+    1、返回值是一个数组(如果捕获不到就是NULL)
+        1、第一项：当前捕获的内容
+        2、index：当前捕获的内容的索引
+        3、input:源字符串
+    2、正则的懒惰性
+    如果正则不加g，只捕获第一次符合规则的内容，当前正则身上的lastIndex都是0（lastIndex是每次正则匹配开始的位置）
+    如果加上g,可以捕获到所有符合 规则的内容，消除正则的懒惰性
+
+     */
+    //    let str = 'qw123ert456yuio789p';
+    //    let reg = /\d{3}/g;
+    //    //console.log(reg.test(str));
+    //    console.log(reg.lastIndex);// 0
+    //    console.log(reg.exec(str));// ['123']
+    //    console.log(reg.lastIndex);// 5
+    //    console.log(reg.exec(str));// ['456']
+    //    console.log(reg.lastIndex);// 11
+    //    console.log(reg.exec(str));// ['789']
+    //    console.log(reg.lastIndex); // 18
+    //    console.log(reg.exec(str));// null
+    //    console.log(reg.lastIndex); // 0
+       // ["123", index: 2, input: "qw123ert456yuio789p", groups: undefined]
+
+       // 如果正则加上g，那每捕获一次，正则的lastIndex就会记录当前捕获到的内容的最后一项索引的值，当下一次再继续捕获的时候，会从上一次记录的索引的基础上加1进行捕获，
+      //  知道捕获到null为止，在继续从头进行捕获
+    // reg.lastIndex = 5;// 如果正则加上g，可以改变lastIndex的值来该变获取的位置
+    // console.log(reg.exec(str));// ['456']
+
+
+    //---------------------------------
+    let str = 'qw123ert456yuio789p';
+    let reg = /\d{3}/g;
+
+    function myExec(str){
+        // 如果当前正则没加修饰符g，正则身上的global属性值是false，如果加上是true
+        if(!this.global){
+            return this.exec(str);
+        }
+        let ary = [];// 用来存放每一次捕获到的内容
+
+        let res = this.exec(str);
+        while(res){
+            ary.push(res[0]);// 把捕获到的内容放到ary中
+            res = this.exec(str);// 继续捕获，把捕获到的内容赋值给res,直到捕获到null为止停止循环
+        }
+
+        return ary.length===0?null:ary;
+        // 如果ary的length是0，说明一次都没捕获到，那时应该return null
+    }
+    RegExp.prototype.myExec = myExec;
+
+    console.log(reg.myExec(str));
+    console.log(str.match(reg));
+   
+   </script> 
+</body>
+</html>

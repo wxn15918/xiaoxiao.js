@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #box{
+            width: 200px;
+            height: 200px;
+
+        }
+    </style>
+</head>
+<body>
+    <div id="box" style="background: red;"></div>
+   <script>
+       let box = document.getElementById('box');
+       // style:他是元素身上的一个属性，其属性值是一个对象，只能获取或设置行间样式
+
+       console.log(box.style.background);
+    /* 
+    在js中获取元素所有经过计算的css样式
+    */
+       console.log(window.getComputedStyle(box));
+       //getComputedStyle(ele,伪类)// 返回值是一个对象，在ie浏览器不能用，
+       // 在ie下用ele.currentStyle,他是一个属性，返回值是一个对象
+   </script> 
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+               function Fn() {
+            this.x = 100;
+            this.y = 100;
+        }
+        Fn.prototype.getX = function () {
+            console.log(this.x)
+        }
+        let f1 = new Fn;
+        // 手动重新定向的原型没有constructor属性,但是可以手动添加,内置类的原型不允许重定向。但是可以向原型里面新增方法
+        Fn.prototype = {
+            getY: function () {
+                console.log(this.y)
+            },
+            constructor:Fn
+        };
+        let f2 = new Fn;
+        console.log(f1.getX);//  fun
+        console.log(f2.getX);// un
+        console.log(f1.constructor);//Fn
+        console.log(f2.constructor);// Object(){native code}
+        console.log(Fn.prototype);// {getY}
+
+
+        function Foo() {
+            getName = function () {
+                console.log(1);
+            };
+            return this;
+        };
+        Foo.getName = function () {
+            console.log(2);
+        };
+        Foo.prototype.getName = function () {
+            console.log(3);
+        };
+        var getName = function () {
+            console.log(4);
+        };
+
+        function getName() {
+            console.log(5);
+        }
+
+        Foo.getName(); // 2
+        getName();  // 4
+        Foo().getName(); // Foo先执行，然后在用返回值找到getName在次执行 // 1
+        getName(); // 1
+        new Foo.getName(); // 2 先执行 Foo.getName,假设找到的结果是af0 然后执行 new af0()
+        new Foo().getName();//  3
+        new new Foo().getName();// 3
+
+    </script>
+</body>
+</html>

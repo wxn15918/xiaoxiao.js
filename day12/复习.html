@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    /* 
+    a = 9 0 1 0 1 2
+    fn = af0
+    f = af1
+    m = 5
+    n = 5
+    x = 6
+     */
+    var a = 9;
+    function fn() {
+        /* 
+        此作用域不销毁
+         */
+        a = 0;
+        return function (b) { // af1
+            /* 
+            b = 5
+            销毁
+             */
+            return b + a++; // 5 +1-->6
+        }
+    }
+    var f = fn();
+    var m = f(5); // 5
+    alert(m); // '5'
+
+    var n = fn()(5); // af2()
+    alert(n); // '5'
+
+    var x = f(5); // 6
+    alert(x); // '6'
+    alert(a); // '2'
+
+
+
+    // function fn() {
+    //     /* 
+    //     此作用域不立即销毁
+    //      */
+    //     a = 0;
+    //     return function (b) { // af2
+    //         /* 
+    //         b = 5  销毁
+    //          */
+    //         return b + a++; // 5 + 0 -->5
+    //     }
+    // }
+    /* 
+    a = 1 1 3
+    obj1 = af0
+    fn1 = af1
+    
+     */
+    var a = 1;
+    var obj1 = { // af0
+        a: 0, // 2
+        fn1: (function (a) {
+                /* 
+                a = 1 2 3 4
+                此作用域不销毁
+                 */
+                this.a = a; // window.a = 1
+                a++;
+                return function () { // af1
+                    /* 
+                    
+                     */
+                    this.a = a++;
+                    // window.a = a++  3
+                    console.log(a); // 4
+            }
+        })(a) // 1
+    };
+    obj1.fn1(); // 3  this-->obj1
+    var fn1 = obj1.fn1;
+    fn1(); // 4   this-->window
+    console.log(a); // 3
+    console.log(obj1.a); // 2
+    R(1404294396)  11:28:30
+        /* 
+        num = 1 2 4
+        obj = af0
+        f = af0
+         */
+        var num = 1;
+        var obj = {
+            num: 2, // 4
+            fn: (function (num) {
+                    /* 
+                    num = 1 4 1 3 4 6 7
+                    不销毁
+                     */
+                this.num *= 2; // window.num*=2
+                num += 3;
+                var num = 1;
+                return function () { // af0
+                   /* 
+                   
+                    */
+                    num += 2;
+                    this.num += 2; //obj.num+=2
+                    console.log(++num); // 7
+                }
+            })(num)
+        };
+        var f = obj.fn;
+        f(); // 4  this-->window
+        obj.fn(); // 7  this-->obj
+        console.log(window.num, obj.num); // 4 4
+
+
+  /* 
+        number = 2 4 8
+        obj = af0
+        fn1 = af1
+         */
+        var number = 2;
+        var obj = { // af0
+            number: 4, // 8
+            fn1: (function () {
+                    /* 
+                    number = NaN 3 9 27
+                     */
+                    this.number *= 2; // window.number*=2
+                    number = number * 2; // undefined*2
+                    var number = 3;
+                    return function () { // af1
+                        /* 
+                        
+                         */
+                        this.number *= 2;  // obj.number*=2
+                        number *= 3;
+                        alert(number); // '27'
+                    }
+            })()
+        };
+        var fn1 = obj.fn1;
+        alert(number); // '4'
+        fn1(); // '9' this-->window
+        obj.fn1(); // '27' this-->obj
+        alert(window.number); // '8'
+        alert(obj.number); // '8'
+
+
+</body>
+</html>

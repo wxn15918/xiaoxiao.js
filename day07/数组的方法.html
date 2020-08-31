@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // indexOf:检测摸一个值在数组中第一次出现的位置（索引）,如果没有检测的值，返回值是-1
+        var ary = [1,2,3,4,4,2,4,3,6];
+        console.log(ary.indexOf(2));// 1
+        console.log(ary.indexOf(4));// 3
+        console.log(ary.indexOf(7));// -1
+
+        // 传两个参 n m : n代表检测的值，m表示检测开始的位置
+
+        console.log(ary.indexOf(3,3));// 7
+
+       // lastIndexOf:检测摸一个值在数组中第一次出现的位置（索引）,如果没有检测的值，返回值是-1
+
+       var ary = [1,2,3,4,4,2,4,3,6];
+        console.log(ary.lastIndexOf(2));// 5
+
+         // 传两个参 n m : n代表检测的值，m表示检测结束的位置
+         console.log(ary.lastIndexOf(4,5));// 4
+
+         // includes:检测一个值是否在数组中，如果有返回true，没有返回false
+
+         var ary = [1,2,3,4,4,2,4,3,6];
+        console.log(ary.includes(2));// true
+        console.log(ary.includes(8));// false
+    </script>
+</body>
+</html>

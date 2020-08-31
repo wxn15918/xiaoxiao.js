@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+    // 封装一个方法，用来实现得到当前每一次捕获的大内容和分组捕获的小内容
+    let str = '{0}年{1}月{2}日';
+    let reg  = /\{(\d)\}/g;
+    function myMatch(reg){
+        if(!reg.global){
+            return this.match(reg);
+        }
+
+        let bigAry = [];
+        let smallAry = [];
+        let res =reg.exec(this);
+        console.log(res);
+        while(res){
+            bigAry.push(res[0]);
+            smallAry.push(res[1]);
+             res =reg.exec(this);
+        }
+
+        let obj ={bigAry,smallAry}
+        return bigAry.length === 0? null: obj;
+        
+
+}
+String.prototype.myMatch = myMatch;
+
+console.log(str.myMatch(reg)); 
+//  {
+//   bigAry:['{0}','{1}','{2}'],
+//   smallAry:['0','1','2']
+// }
+
+
+   function myMatch(reg) {
+      if (!reg.global) {
+        return reg.exec(this);
+      }
+      let bigAry = [];
+      let smallAry = [];
+
+      let res = this.matchAll(reg);
+      for (var ss of res) {
+        let [$1, $2] = ss;
+        bigAry.push($1);
+        smallAry.push($2);
+      }
+
+      let obj = {
+        bigAry,
+        smallAry
+      }
+      return bigAry.length === 0 ? null : obj;
+
+    }
+    String.prototype.myMatch = myMatch;
+    console.log(str.myMatch(reg));
+
+
+  let str = 's1a2df3e4gh5w6jkl';
+    let reg = /\d([a-z])\d/g;
+
+
+    </script>
+</body>
+</html>

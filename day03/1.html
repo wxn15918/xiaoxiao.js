@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // =: 赋值，把等号右边的值给等号左边的变量
+        // == : 比较，返回值是布尔值
+        // !=: 不等于，只比较值
+        // === : 绝对等，值和类型都相等
+        // !==: 值和类型都不等
+
+
+        // 不同数据类型比较，会默认进行隐式的类型转换
+        // 数字 == 字符串 全部转成数字在比较
+        // 数字 == 布尔 全部转成数字在比较
+        // 布尔 == 字符串 全部转成数字在比较
+       
+        null == null;
+        undefined == undefined;
+        null == undefined;
+        // 除此之外null和undefined和和谁都不相等
+
+        // 对象 == 对象 比较的是空间地址，不用转换------
+        // 对象 == 数字 全部转成数字在比较，结果是false
+        // 数组 == 数字 有可能是true------
+        // 对象 == 布尔 全部转成数字在比较
+        // 对象 == 字符串 全部转换成字符串在比较------
+
+        console.log(3 == 3);// true
+        console.log('1' == 1);// true
+        console.log('1px' == 1);// false
+        console.log(true == 1);// true
+        console.log(false == 0);// true
+        console.log(true == '1');// true
+        console.log(false == '');// true
+        console.log(null == 0);// false
+        console.log(undefined == NaN); // false
+        console.log(null == null);// true------
+        console.log(undefined == undefined);// true------
+        console.log(null == undefined);// true------
+        console.log({} == {});// false
+        var obj = {};
+        var b = obj;
+        console.log(obj == b);// true
+        console.log({} == 1);// false
+        console.log([1] == 1);// true
+        
+        console.log({} == true);// true
+        
+        console.log({} == '[object Object]');// true
+        
+        console.log(true>=0);// true
+        console.log(false<=1);// true
+        
+        console.log(3 != 5);// true
+        console.log(false=== 0);// false
+        console.log(false !== 0);// true
+        
+        console.log(NaN === NaN);// false------
+        console.log(NaN == NaN);// false------
+        console.log(false != 0);// false
+
+        console.log(false !== 0);// true
+        
+        
+        console.log(!isNaN(undefined) == !!isNaN(NaN));// false
+        
+        
+     
+    </script>
+</body>
+</html>

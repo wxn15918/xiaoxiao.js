@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        #box {
+            width: 800px;
+            margin: 200px auto;
+            text-align: center;
+        }
+        #show {
+            color: rgba(255, 0, 0, 0.918);
+            font-size: 60px;
+            font-weight: 700;
+            display: block;
+            /* width: 200px; */
+            height: 100px;
+            line-height: 100px;
+
+        }
+        button {
+            display: block;
+            width: 100px;
+            height: 50px;
+            line-height: 50px;
+            background: orangered;
+            color: white;
+            font-size: 20px;
+            margin:  10px auto;
+
+        }
+    
+    </style>
+</head>
+<body>
+    <div id="box">
+        <p id="show">吴刚</p>
+        <button id="btn">开始</button>
+    </div>
+    <script>
+        var show = document.getElementById('show');
+        var btn = document.getElementById('btn');
+        var int = null;
+        btn.onclick = function (){
+            var value = btn.innerText;
+            if(value == '开始'){
+                int = setInterval(createName,10);
+                btn.innerText = '停止';
+            }else {
+                clearInterval(int);
+                btn.innerText = '开始';
+            }
+        };
+
+        function createName(){
+            var ary = ['孙悟空','猪八戒','唐僧','沙和尚','贾宝玉','林黛玉','薛宝钗','刘备','诸葛亮','曹操','周瑜','黄盖','林冲','花和尚','李逵','吴邪','张起灵','王胖子','三叔','吴一穷','吴二白','吴三省','黑瞎子','解语花','潘子'];
+            var index = Math.round(Math.random()*(ary.length-1-0)+0);
+            var name = ary[index];
+            show.innerText = name;
+
+        }
+    </script>
+</body>
+</html>

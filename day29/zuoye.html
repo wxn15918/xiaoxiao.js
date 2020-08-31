@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <script>
+     /*   function myEvery(callback){
+        let flag = true;
+        for(let i=0;i<this.length;i++){
+            if(!callback(this[i],i)){
+                flag = false;
+                break;
+            }
+        }
+        return flag;
+       }
+       Array.prototype.myEvery = myEvery;
+       let ary = [1,2,3,4,5];
+       let fn =  ary.myEvery((item,index)=>{
+        return item>3;
+       });
+    console.log(fn); */
+     
+
+       //-----------------------------
+      function mySome(callback){
+        for(let i=0;i<this.length;i++){
+           let res = callback(this[i],i);
+           if(res){
+               return true;
+           }
+        }
+        return false;
+      }
+       Array.prototype.mySome = mySome;
+       let ary = [1,2,3,4,5];
+      let fn =  ary.mySome((item,index)=>{
+        return item>3;
+       })
+       console.log(fn); 
+
+       function myFilter(callback){
+           let newAry = [];
+        for(let i=0;i<this.length;i++){
+            if(callback(this[i],i)){
+                newAry.push(this[i]);
+            }
+        }
+        return newAry;
+        }
+       Array.prototype.myFilter = myFilter;
+       let ary = [1,2,3,4,5];
+      let fn =  ary.myFilter((item,index)=>{
+        return item>2;
+       })
+       console.log(fn);
+   </script> 
+</body>
+</html>

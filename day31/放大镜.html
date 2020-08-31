@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .warp{
+            width: 650px;
+            margin: 20px auto;
+            display: flex;
+        }
+          /* .warp .outer,.warp .box{
+            float: left;
+        } */
+        .warp .outer{
+            width: 300px;
+            height: 400px;
+            position: relative;
+        }
+        .warp .outer img{
+            width: 100%;
+            height: 100%;
+        }
+        .warp .outer .inner{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100px;
+            height: 100px;
+            background: rgba(250,0,0,.3);
+            cursor: move;
+            display: none;
+        }
+        .warp .box{
+            position: relative;
+            box-sizing: border-box;
+            width: 350px;
+            height: 450px;
+            overflow: hidden;
+            display: none;
+        }
+        .warp .box img{
+            position: absolute;
+            top: 0;
+            left: 0;
+            /* width: 1050px;
+            height: 2025px; */
+        }
+      
+    </style>
+</head>
+<body>
+    <section class="warp ">
+        <div class="outer">
+            <img src="./宝贝.jpg" alt="">
+            <div class="inner"></div>
+        </div>
+        <div class="box">
+            <img src="./宝贝.jpg" alt="">
+        </div>
+    </section>
+    <script src="./jquery-1.11.3.js"></script>
+    <script>
+       /* 
+       放大镜需要的公式
+       1、大图的宽高 = box的宽(高) / inner的宽(高) * outer的宽(高)
+       2、inner的位置 = 鼠标到body的X(Y)值 - outer的左(上)偏移量 - inner宽(高)的一半(鼠标在inner的中心位置)
+       3、大图移动的距离 = -inner移动的距离 / outer的宽(高) * 大图的宽(高)
+       */
+        
+        let $outer = $('.outer'),
+        $inner = $outer.find('.inner'),
+        $box = $('.box'),
+        $boxImg = $box.find('img');
+
+        let outerW = $outer.outerWidth(),// 获取盒子的宽
+            outerH = $outer.outerHeight(),// 获取盒子的高
+            outerOffset = $outer.offset(),// 获取盒子所有的偏移
+            innerW = $inner.outerWidth(),
+            innerH = $inner.outerHeight(),
+            boxW = $box.outerWidth(),
+            boxH = $box.outerHeight(),
+            boxImgW = boxW / innerW * outerW,
+            boxImgH = boxH / innerH * outerH;           
+        // 计算大图的宽高
+            $boxImg.css({
+                width : boxImgW,
+                height: boxImgH
+            })
+        // 计算inner盒子的位置
+        function computed(e){
+            // 计算出inner距离outer的左位移和上位移
+              let innerL = e.pageX - outerOffset.left - innerW/2,
+                innerT = e.pageY - outerOffset.top - innerH/2;
+                let minL =0,
+                    minT =0,
+                    maxL = outerW - innerW,
+                    maxT = outerH - innerH;
+                    
+                    if(innerL<minL){
+                        innerL = minL;
+                    }else if(innerL >= maxL){
+                        innerL = maxL;
+                    }else{
+                        innerL = innerL;
+                    }
+                    if(innerT<minT){
+                        innerT = minT;
+                    }else if(innerT >= maxT){
+                        innerT = maxT;
+                    }else{
+                        innerT = innerT;
+                    }
+                $inner.css({
+                    left:innerL,
+                    top:innerT
+                })
+                // 控制大图移动
+                $boxImg.css({
+                    left:-innerL /outerW * boxImgW,
+                    top:-innerT / outerH * boxImgH
+                })
+        }
+    $outer.mouseenter(function(e){
+        $inner.css('display','block');
+        $box.css('display','block');
+        computed(e);
+    }).mouseleave(function(e){
+        $inner.css('display','none');
+        $box.css('display','none');
+    }).mousemove(function(e){
+        computed(e);
+    })
+
+    </script>
+</body>
+</html>

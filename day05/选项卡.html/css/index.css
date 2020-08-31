@@ -1,0 +1,43 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+ul,ol{
+    list-style: none;
+}
+.main{
+    width: 500px;
+   
+    margin: 100px auto;
+}
+.main ul{
+    overflow: hidden;
+    position: relative;
+    top: 1px;
+}
+.main ul li{
+    float: left;
+    height: 50px;
+    width: 60px;
+    text-align: center;
+    line-height: 50px;
+    margin-right: 10px;
+    background: #ccc;
+    border: 1px solid #999;
+    cursor: pointer;
+}
+.main ul  .select{
+    background: #fff;
+    border-bottom-color:#fff ;
+}
+.main div{
+    height: 150px;
+    display: none;
+    text-align: center;
+    line-height: 150px;
+    border: 1px solid #999;
+    font-size: 20px;
+}
+.main  .select{
+  display: block;
+}

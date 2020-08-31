@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 打开一个页面就形成一个全局作用域
+        // 作用域形成之后还会形成一个全局的window大对象
+       // window.alert(12);
+        //如果使用window上的方法或属性，可以省略window
+        window.parseFloat('13px');
+        parseFloat()
+       // console.log(window);
+        // 全局变量：在全局作用域下创建的变量
+       // var let const function
+       // 全局作用域下变量的特点
+       // 1、var(function)会给window增加键值对(let和const不会)
+       var a = 12; // window增加一个键值对，属性名是a，属性值是12(在全局作用域下，全局变量和window是相通的)
+       console.log(a);
+       console.log(window.a);
+       b = 12;// 只会给window增加键值对(但是没有变量提升)
+       console.log(b);// 12
+       
+       function fn(){
+           console.log(1);
+       };
+       window.fn();
+
+       let s = 12;
+       console.log(s);
+       console.log(window.s);// undefined
+
+       // 2、在同一个作用域下var和function创建的变量可以反复创建，但是let和const 不可以
+
+       var a = 12;
+       var a = 13;
+       console.log(a);// 13
+       // 在执行的过程中，如果发现当前的变量已经创建过了，只会重新赋值
+
+      // 在代码执行之前有一个机制，词法解析，检查当前代码，如果发现不符合规范的直接报错
+
+      // es6使代码更加严谨
+
+      // 3、var和function创建的变量有变量提升，但是let和const就没有
+
+
+
+  
+  
+
+      
+    </script>
+</body>
+</html>

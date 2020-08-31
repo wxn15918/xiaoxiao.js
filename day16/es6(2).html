@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //  ...运算符
+        // 解构赋值
+
+        // 传递实参的时候
+        // let ary = [12,34,54,32,56,2,234,5];
+        // console.log(Math.max(...ary));// 234
+        // // 接受实参的时候
+        // function fn(n,m,...arg){
+        //     console.log(arg);// [3,4]
+        // };
+        // fn(1,2,3,4)
+
+        // // 克隆数组(浅克隆)
+
+        // let ary = [100,200,300,400];
+        // let cloneAry = [...ary1];
+        // console.log(cloneAry);// [100,200,300,400]
+
+        // // 合并数组
+
+        // let ary0 = [1,2];
+        // let ary2 = [3,4];
+        // let ary3 = [...ary0,...ary2,5,6];
+        // console.log(ary3);// [[1,2,3,4,5,6]]
+        // //克隆对象
+        // let obj = {
+        //     name:1,
+        //     age:2
+        // }
+        // let cloneObj = {...obj};
+        // console.log(cloneObj);
+
+        // // 解构赋值
+
+        // let ary5 = [100,200,300,400];
+        // // 使用解构赋值时，必须保证等号左右两边结构一样
+
+          // 如果中间不想解构，就拿逗号站位(只想解构开头和结尾)
+        // let [n,,,m] = ary5;
+        // console.log(n,m);
+
+    //    let [n,...arg] = ary;
+      // ...arg那剩余的值全部解构到一个数组里边
+    //    console.log(n,arg);// 100 [200,300,400]
+
+    //    let [n=0,,,m,o=0] = ary;
+    // 如果解构的时候右边没有这一项，咱们可给当前的变量赋一个默认值
+    //    console.log(n,o)// 100 0
+
+
+ // 多维数组的解构(只要等号所有两边的结构和位置保持一致就行了)
+// let ary1 = [10,[20,30,[40]]]
+// let [n,[,m,[x]]] = ary1
+// console.log(n,m,x);// 10 30 40
+
+// ---------------------------------
+// 对象的解构赋值
+
+// let obj = {
+//     name:1,
+//     age:2
+// }
+// // 左边的变量名要和右边的属性名一致，可以不按顺序
+// let {name,age} = obj;
+// console.log(name,age);// 1 2
+
+// let obj = {
+//     ss:1,
+//     age:2,
+//     ary:[12,22,33]
+// }
+// let {ss,ary:[,,m]} = obj;
+// console.log(ss,m);// 1 33
+
+
+// let ary = [12,{ss:23}]
+
+// let [,{ss}] = ary;
+// console.log(ss);// 23
+
+let obj = {name:12};
+// 改变对象里的属性名
+let {name:w} = obj;
+console.log(w);// 12
+
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #menu{
+            list-style: none;
+            width: 300px;
+            border: 1px solid;
+            padding: 5px 10px;
+            box-sizing: border-box;
+            display: none;
+            position: absolute;
+        }
+        li{
+            height: 20px;
+            line-height: 20px;
+            border-bottom: 1px dashed pink;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <ul id="menu">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+   <script>
+       let menu = document.getElementById('menu');
+       window.oncontextmenu = function(e){
+            e.preventDefault();
+        //    e.returnValue = false;
+        // return false;
+        menu.style.display = 'block';
+        let left = e.clientX;
+        let top = e.clientY;
+       menu.style.left = left + 'px';
+        menu.style.top = top + 'px';
+        
+       }
+
+   </script> 
+</body>
+</html>

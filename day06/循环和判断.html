@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 三元运算符
+        if(true){
+            console.log(1);
+        }else{
+            console.log(2);
+        }
+        // 判断条件 ? 条件成立做的事 : 条件不成立做的事
+        // 如果不成立的时候没有语句执行，那就是Null站位
+        // 如果条件成立要做多件事，每件事之间用逗号间隔，然后用小括号包裹起来
+
+        true ? console.log(1) : console.log(2);
+        true ? (console.log(100),console.log(200)) : null
+        // switch后面小括号里的值和case后的值进行绝对比较，如果相等就执行case下面的代码
+        // 条件一旦成立，必须遇到break才会停止，否则下面的语句无论是否成立都会执行
+        // default:相当于else,上面代码都不执行时他才执行
+        var num = 9;
+        switch (num){
+            case 10:
+            console.log(100);
+            break;
+            case 20:
+            console.log(200);
+            break;
+            case 8:
+            console.log(300);
+            break;
+            default:
+            console.log(900);
+        }
+
+
+        var obj ={
+            name: 1,
+            age:2,
+            sex:3
+        }
+       for(var key in obj){
+           // 对象中有几个键值对就循环几次，key的值代表当前的属性名，字符串类型
+           console.log(key);// 对象的每一个属性名
+           console.log(obj[key]);// 对象的每一个属性值
+       }
+
+      // while:一般用于不知道循环次数的循环
+     
+      
+    </script>
+</body>
+</html>

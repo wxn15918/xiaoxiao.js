@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+       li{
+           list-style: none;
+       } 
+    </style>
+</head>
+<body>
+   <ul id="box">
+    <li>39</li>
+    <li>67</li>
+    <li>22</li>
+    <li>38</li>
+    <li>20</li>
+   </ul>
+    <button id="btn">按钮</button>
+    <script src="./utils.js"></script>
+    <script>
+        let button = document.getElementById('btn');
+        let list = document.getElementsByTagName('li');
+        list = utils.toArray(list);
+        console.log(list);
+        let flag = -1;
+        button.onclick = function(){
+            flag*= -1;
+            list.sort(function(a,b){
+                
+                return (a.innerText - b.innerText)*flag;
+            })
+            // 
+            for(let i=0;i<list.length;i++){
+               box.appendChild(list[i]);
+            }
+        }
+
+        // sort排序
+
+        //let ary = [23,24,15,46,1,75]
+        // let ary = [{name:3},{name:2},{name:5}]
+        // ary.sort(function (a,b){
+        //     // b是当前项，a是后一项
+        //     // 如果a-b<0就交换位置，说明当前项大于后一项
+        //    // return a-b;
+        //   // return 1;
+        //   return a.name - b.name;
+        // })
+        // console.log(ary);
+    </script>
+</body>
+</html>

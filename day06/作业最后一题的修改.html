@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var num = null;
+        function sum(){
+            for(var i = 0;i<arguments.length;i++){
+                var item = Number(arguments[i]);
+                if(!isNaN(item)){
+                   num += item ;
+                }
+            }
+            return num
+        }
+
+        console.log(sum(13,12,true,undefined,'33'));
+
+
+
+        function fn(num) {
+      if (num > 100) {
+        return 0;
+      };
+      if (num % 3 === 0 && num % 5 === 0) {
+        return num + fn(num + 1);
+      }
+     return fn(num + 1);
+
+    }
+    console.log(fn(1));
+    </script>
+</body>
+</html>

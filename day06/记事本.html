@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #box{
+            width: 500px;
+            margin: 0 auto;
+        }
+       ul{
+           list-style: none;
+           width: 100%;
+           height: 400px;
+           border: 1px solid #333;
+           font-size: 20px;
+           overflow: hidden;
+       }   
+       li{
+           height: 30px;
+           line-height: 30px;
+           background: pink;
+           margin-top: 10px;
+       } 
+       #inp{
+           width: 300px;
+           height: 30px;
+           margin-left: 80px;
+       } 
+       #btn{
+           width: 50px;
+           height: 30px;
+       }
+        
+    </style>
+</head>
+<body>
+    <div id="box">
+        <ul id="main">
+            <li>1111</li>
+        </ul>
+        <input type="text" id="inp">
+        <button id="btn">增加</button>
+    </div>
+
+    <script>
+        var main = document.getElementById('main');
+        var inp = document.getElementById('inp');
+        var btn = document.getElementById('btn');
+
+        btn.onclick = function(){
+            var value = inp.value;
+
+
+            if(!value){
+                alert('当前内容不能为空，请重新输入');
+                return;
+            }
+
+            var li = '<li>'+ value+'</li>';
+            main.innerHTML += li;
+            inp.value = '';
+
+            var list = document.getElementsByTagName('li');
+            for(var i =0;i<list.length;i++){
+               if(i%2 === 0){
+                   list[i].style.background = 'pink';
+               }else{
+                list[i].style.background = 'green';
+               }
+            }
+
+        }
+
+
+
+        
+        let box = document.getElementById('box');
+        let input = document.getElementById('input');
+        input.onblur = function () {
+            let value = input.value;
+            if (!value) {
+                alert('兄弟,输入点东西吧');
+                return;
+            }
+            let li = document.createElement('li');
+            let button = document.createElement('button');
+            li.innerHTML = `${value}<button id='btn'>删除</button>`
+            box.appendChild(li);
+            let list = document.querySelectorAll('#box li')
+            changeRowColor(list);
+            let btn = document.querySelectorAll('#box button');
+            for (let i = 0; i < btn.length; i++) {
+                btn[i].onclick = function () {
+                    this.parentNode.remove()
+                    let listChange = document.querySelectorAll('#box li')
+                    changeRowColor(listChange);
+                }
+            }
+        }
+
+        function changeRowColor(list) {
+            for (var i = 0; i < list.length; i++) {
+                if (i % 2 === 0) {
+                    list[i].style.background = "pink";
+                } else {
+                    list[i].style.background = "yellowgreen";
+                }
+            }
+        }
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box {
+            width: 100px;
+            height: 100px;
+            background: pink;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        button {
+            width: 80px;
+            height: 30px;
+            background: orangered;
+            line-height: 30px;
+            text-align: center;
+            position: relative;
+            top: 200px;
+        }
+
+        #right {
+            margin-left: 20px
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box" style="left:0"></div>
+    <button id="left">往左跑</button>
+    <button id="right">往右跑</button>
+    <script>
+        // 固定步长的动画
+        let box = document.getElementById('box'),
+            left = document.getElementById('left'),
+            right = document.getElementById('right');
+        let target = document.documentElement.clientWidth - box.offsetWidth;
+        let timer = null;
+        let step = 8;// 当前定时器每次运行的距离
+        right.onclick = function(){
+            clearInterval(timer);
+            timer = setInterval(()=>{
+                let curL = parseFloat(box.style.left);
+                curL += step;
+                if(curL>=target){
+                    clearInterval(timer);
+                    box.style.left = target + 'px';// 为了让球运动到指定的位置
+                    return;
+                }
+                box.style.left = curL + 'px';
+            },20)
+        }
+
+        left.onclick = function(){
+            clearInterval(timer);
+            timer = setInterval(()=>{
+                let curL = parseFloat(box.style.left);
+                curL -= step;
+                if(curL <= 0){
+                    clearInterval(timer);
+                    timer = null;
+                    curL = 0;
+                }
+                box.style.left = curL + 'px';
+            },20)
+        }
+
+          // 当点击左右的时候，小球会出现不知道往那边跑的现象，因为你开辟了多个定时器，每一个定时器里都去操作当前的小球，所以这时候你在点击按钮的时候，把之前的定时器清空就好了
+    </script>
+</body>
+
+</html>

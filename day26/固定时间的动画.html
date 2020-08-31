@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #box{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div id="box" style="left:0"></div>
+    <script>
+        let box = document.getElementById('box');
+        let target = document.documentElement.clientWidth - box.offsetWidth;// 需要运动的总长度
+        let duration = 2000;
+        let timer = null;
+        let begin = parseFloat(box.style.left);// 起始位置
+        let change = target - begin;// 需要移动的总距离
+
+        /* 
+        t:timey 已经运动过的时间
+        b:begin 起始位置
+        d:duration 总时间
+        c: change 总共需要运动的距离
+        求当前位置
+        t/d === 当前位置/c
+        当前位置 = t/d *c + b
+         */
+         function linear(t,b,d,c){
+             return  t/d *c + b;// 当前球距离左边的距离
+         }
+        function move(){
+            let flag = 0;// 一个标识
+            timer = setInterval(()=>{
+                flag += 20;
+                if(flag>=duration){
+                    clearInterval(timer);
+                    timer = null;
+                    box.style.left = target + 'px';
+                    return;
+                }
+                box.style.left = linear(flag,begin,duration,change) + 'px';
+            },20)
+        }
+        move();
+    </script>
+</body>
+</html>

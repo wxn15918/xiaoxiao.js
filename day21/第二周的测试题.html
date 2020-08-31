@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+          // class A {
+  //   constructor(n,m){
+  //     // this-->当前实例
+  //     this.n = n;
+  //     this.m = m;
+  //   }
+
+  //   ss(){ // 给当前类A增加方法
+
+  //   }
+
+  //   x = 100; // 给当前实例增加私有属性
+  //   static num = 100; // 把当前类当做对象，增加键值对
+
+  // }
+  // // 想给当前类A增加属性
+  // A.prototype.e = 100;
+
+
+
+
+  // let f = new A(1,2);
+
+  //----------------------------------------------------
+  class A{
+    constructor(n){
+      console.log(111);
+      this.n = n;
+    }
+    getX(){}
+  }
+
+  class B extends A{
+    constructor(){
+      super(200); // super的目的就是让类B的实例继承类A的私有属性,super不能省略
+      // super会让类A的构造函数在此处执行，并且让函数的this指向当前类B的实例
+      // super和constructor要同时存在
+      this.x = 100;
+    }
+    
+  }
+  let f = new B(); // {x:100,n:un}
+  console.log(f);
+  // 我想让类B的实例继承类A的私有和共有属性
+  // f--->B.prototype--->A.prototype
+
+  //---------------------------
+      /*编写unique方法，实现如下的效果：先去重后排序*/
+      let ary = [12, 23, 12, 13, 13, 12, 23, 14, 8];
+    // ary.unique().sort((a, b) => a - b); //=> 最后的ary等于[8,12,13,14,23]
+
+    function unique(){
+
+      // return [...new Set(this)]
+      return Array.from(new Set(this));
+    }
+
+    Array.prototype.unique = unique;
+    console.log(ary.unique().sort((a,b)=>a-b));
+//----------------------------------------
+// Function.prototype.changeThis = function changeThis(context,...arg) { 
+//         //=>实现你的代码 
+//         context = context || window;
+//         let res = null;
+//         context.$fn = this;
+//         res = context.$fn(...arg);
+//         delete context.$fn;
+//         return res;
+//     };
+// function fn(x,y){
+//     this.total = x+y;
+//     return this;
+// };
+// let res = fn.changeThis(obj,100,200);
+// console.log(res);
+//----------------------------
+ // 假设法
+
+ let max = ary[0]; // 假设数组的第一项就是最大的值；然后去循环数组，那数组的每一项会让当前的max值进行比较，如果比当前的max值大了，那就把当前的值赋值给max
+
+for(var i = 1;i<ary.length;i++){
+  // if(ary[i]>max){
+  //     max = ary[i];
+  // }
+  ary[i]>max ? max = ary[i] : null;
+}
+console.log(max);
+
+ // 第一种利用sort排序，然后去最大值
+    // ary.sort((a,b)=>b-a)[0]
+
+    // Math.max(...ary);
+    // Math.max.apply(Math,ary);
+    //--------------------
+    
+    try {
+      console.log(a);
+      // 如果try里的代码出错了，那就会走catch里的代码，而且还能输出错误的信息
+    } catch (e) {
+      console.log(e);
+      console.log(900);
+    }
+    finally { // finnally里的代码永远会执行
+      console.log(100);
+      console.log(200);
+    }
+
+    function toArray() {
+      let ary = [];
+      try {
+        ary = [].slice.call(arguments);
+      } catch (e) {
+        for (var i = 0; i < arguments.length; i++) {
+          ary.push(arguments[i])
+        }
+        return ary;
+      }
+    }
+
+
+    </script>
+</body>
+</html>

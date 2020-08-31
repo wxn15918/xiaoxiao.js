@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #box{
+            width: 200px;
+            height: 200px;
+            background: yellowgreen;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        #box h3{
+            text-align: center;
+            background: pink;
+            color: tomato;
+            user-select: none;
+             /* 禁止选中文字 */
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <h3 id="title">头部</h3>
+    </div>
+    <script>
+       
+        let box = document.getElementById('box');
+        let title = document.getElementById('title');
+        let minL =0;
+        let minT =0;
+        let maxL = document.documentElement.clientWidth - box.offsetWidth;
+        let maxT = document.documentElement.clientHeight - box.offsetHeight;
+        // 盒子最新的left值 === 盒子初始的left值 + 鼠标移动的距离
+        title.onmousedown = function(e){
+            this.curL = e.clientX;
+            this.curT = e.clientY;
+            this.left = parseFloat(getComputedStyle(box).left)
+            this.top = parseFloat(getComputedStyle(box).top)
+
+           // 可以把当前鼠标和盒子用绳子绑在一起
+            if(this.setCapture){
+                this.setCapture();
+                title.onmousemove = move;
+                title.onmouseup = up;
+            }else{
+                console.log(2);
+                document.onmousemove = move.bind(this);
+            document.onmouseup = up;
+            }
+        }
+        function move(e){
+            // 不断设置盒子的left和top
+            let newLeft = this.left + (e.clientX - this.curL);
+            let newTop= this.top + (e.clientY - this.curT);
+
+            newLeft<minL ? newLeft = minL : (newLeft>maxL? newLeft = maxL : null );
+            newTop<minT ? newTop = minT : (newTop>maxT? newTop = maxT : null );
+            box.style.left = newLeft + 'px';
+            box.style.top = newTop + 'px';
+        }
+        function up(e){
+            // 单鼠标抬起 的时候清除移动事件
+            // document.onmousemove = document.onmouseup = null;
+            if(this.releaseCapture){
+                this.releaseCapture();
+                title.onmousemove = title.onmouseup = null;
+            }else{
+                document.onmousemove = document.onmouseup = null;
+            }
+        }
+
+
+    
+    </script>
+</body>
+</html>

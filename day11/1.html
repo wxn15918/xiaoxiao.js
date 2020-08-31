@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+//    number 4 
+   var number=2;
+    var obj={// af0 
+
+        number:4,
+      
+        fn1:(function () {// af1 af2
+            this.number*=2;// this是window
+            console.log(this);
+            console.log(number);// UN
+            number=number*2;
+          
+            
+            var number=3;
+            console.log(number);
+            return function () {//af2
+           
+                this.number*=2;// 4 this是window  obj
+                console.log(this);
+                console.log(number);// 3 9 
+                number*=3;
+                console.log(number);// 9 27
+                alert(number);// 4 9
+               
+            }
+        })()
+    };
+    var fn1=obj.fn1;
+    console.log(number);// 4 
+     alert(number);// 4  9 27
+     fn1();
+     obj.fn1();
+    alert(window.number);// 4 8 8
+    alert(obj.number);// 4 4  8
+    </script>
+</body>
+</html>

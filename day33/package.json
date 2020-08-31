@@ -1,0 +1,17 @@
+{
+  "name": "day33",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.5.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "sss": "lessc index.less index.css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

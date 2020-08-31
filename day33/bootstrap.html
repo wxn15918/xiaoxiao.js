@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css">
+    <style>
+        .container {
+          background: hotpink;
+          height: 300px;
+          /* width: 500px;  */
+        }
+    
+        /* .container-fluid {
+          background: hotpink;
+          height: 300px;
+          width: 500px;
+        } */
+      </style>
+    </head>
+    
+    <body>
+      <div class="container">
+        <!-- row代表一行，col代表一列，一行最多12列 -->
+         <!-- <div class="row"> -->
+          <!-- 在中等屏幕下每一列占6份，在小屏幕下每一列占12份就是占一行 -->
+         <!--  <div class="col-md-6 col-sm-12" style="background:red"
+          >.col-md-1</div>
+          <div class="col-md-6 col-sm-12 " style="background:green">.col-md-1</div> -->
+
+
+        <!-- </div>  -->
+        <!-- <div class="row">
+            <!-- col-md-offset-2:其实就是margin-left -->
+            <!-- <div class="col-md-4" style="background:green">1</div>
+            <div class="col-md-4 col-md-offset-2" style="background:red">2</div>
+          </div> -->
+
+      <!-- </div> -->
+
+      <div class="row">
+        <div class="col-md-9 col-md-push-3" style="background:red">.col-md-9 .</div>
+        <div class="col-md-3 col-md-pull-5" style="background:green">.col-md-3</div>
+
+        <p class="text-lowercase">Lowercased text.</p>
+<p class="text-uppercase">Uppercased text.</p>
+<p class="text-capitalize">Capitalized text.</p>
+      </div>
+
+
+      <!-- <div class="container-fluid">
+        ...
+      </div> -->
+</body>
+</html>

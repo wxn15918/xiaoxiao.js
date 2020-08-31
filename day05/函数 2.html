@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function sum() {
+
+            var total = null;
+            for (var i = 0; i < arguments.length; i++) {
+                // 第一步先把实参转换成Number类型再求和
+                var item = Number(arguments[i]);
+                // 判断当前的item是不是NaN,如果不是那就进行累加求和
+                if (!isNaN(item)) {
+                    total += item;
+                }
+            }
+            return total;
+        }
+        console.log(sum(10, 20, false, undefined, '33'));// 63
+    </script>
+</body>
+
+</html>

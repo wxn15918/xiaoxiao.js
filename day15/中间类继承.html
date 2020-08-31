@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function fn(){
+           //  arguments[arguments.length] = 600;
+           // arguments虽然不是Array的实例，但是可以通过__proto__来指向Array的原型，从而来使用Array原型上的方法，这就是中间类继承方法
+           arguments.__proto__ = Array.prototype;
+           arguments.push(600);// arguments不是Array的实例，不能用原型上的方法
+            console.log(arguments);
+        };
+        fn(100,200,300,400)
+    </script>
+</body>
+</html>

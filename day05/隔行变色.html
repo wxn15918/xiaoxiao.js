@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        ul,
+        ol {
+            list-style: none;
+        }
+
+        ul {
+            width: 500px;
+            margin: 50px auto;
+            text-align: center;
+            border: 1px solid greenyellow;
+        }
+
+        li {
+            height: 30px;
+            line-height: 30px;
+            font-size: 16px;
+            color: hotpink;
+        }
+
+        /* ul>li:nth-child(odd){
+            background-color: indianred;
+        }
+        ul>li:nth-child(even){
+            background-color:#eef600;
+        } */
+    </style>
+
+</head>
+
+<body>
+    <div>
+        <ul id="box">
+            <li>郭靖</li>
+            <li>黄蓉</li>
+            <li>洪七公</li>
+            <li>欧阳锋</li>
+            <li>杨康</li>
+        </ul>
+    </div>
+    <script>
+        var box = document.getElementById('box');
+        var list = box.getElementsByTagName('li');
+        for (var i = 0; i < list.length; i++) {
+            //   list[i].style.backgroundColor = 'red';
+            if (i % 2 === 0) {
+                list[i].style.backgroundColor = 'red';
+            } else {
+                list[i].style.backgroundColor = 'green';
+            }
+            // 元素是对象数据类型的，可以给他增加键值对(自定义属性)
+            // 把当前元素的背景颜色存储到他自己身上(以增加键值对的方法)
+            list[i].color = list[i].style.backgroundColor;
+            // 鼠标滑入事件
+            list[i].onmouseover = function () {
+                // this:当前你操作的是谁，this就是谁
+                this.style.backgroundColor = 'pink';
+            }
+            // 鼠标滑出事件
+            list[i].onmouseout = function () {
+                this.style.backgroundColor = this.color;
+            }
+        }
+
+    </script>
+</body>
+
+</html>

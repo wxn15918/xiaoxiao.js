@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #box{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div id="box" style="left:0;top:0"></div>
+    <script src="./jquery-1.11.3.js"></script>
+    <script>
+        // let box = document.getElementById('box');
+
+        /* 
+        t:timey 已经运动过的时间
+        b:begin 起始位置
+        d:duration 总时间
+        c: change 总共需要运动的距离
+        求当前位置
+        t/d === 当前位置/c
+        当前位置 = t/d *c + b
+         */
+      /*    function linear(t,b,d,c){
+             return  t/d *c + b;// 当前球距离左边的距离
+         }
+         let begin = {
+             left:parseFloat(getComputedStyle(box).left),
+             top:parseFloat(getComputedStyle(box).top),
+             width:parseFloat(getComputedStyle(box).width),
+            height:parseFloat(getComputedStyle(box).height),
+         }
+         let target = {
+             left:200,
+             top:200,
+             width:300,
+             height:300
+         }
+         let change = {
+             
+         }
+         for(var key in begin){
+             // 计算每一个样式需要运动的总距离增加到change中
+             change[key] = target[key] - begin[key];
+         }
+       let duration = 3000;
+       let timer = null;
+       let flag = 0;
+      timer = setInterval(()=>{
+           flag += 17;
+           for(let key in change){
+               let cur = linear(flag,begin[key],duration,change[key]);
+               box.style[key] = cur + 'px';
+           }
+            if(flag>=duration){
+                clearInterval(timer);
+                timer = null;
+            }
+       },17) */
+       //--------------------------------------
+       /* $('#box').stop().animate({
+           top:200,
+           left:200,
+           width:300,
+           height:300
+       },3000) */
+
+
+       //-------------------------------
+           /* 
+        curEle:当前需要添加样式的元素
+        target：移动的目标的位置
+        duration：运动的总时间
+        callBack：动画执行完成的回调函数
+      */
+      function move(curEle,target,duration,callBack){
+        
+    }
+
+    
+        /* 
+            @params
+            curEle string
+            target {}
+            duration number || 不传
+            callBack function
+        */
+        function move(curEle, target, duration = 3000, callBack) {
+            let box = document.getElementById(curEle);
+            let begin = {
+                left: parseFloat(getComputedStyle(box).left),
+                top: parseFloat(getComputedStyle(box).top),
+                width: parseFloat(getComputedStyle(box).width),
+                height: parseFloat(getComputedStyle(box).height)
+            }
+
+            let change = {}
+            for (let key in target) {
+                change[key] = target[key] - begin[key];
+            }
+            let timer = null;
+            let flag = 0;
+            timer = setInterval(() => {
+                flag += 20;
+                for (let attr in change) {
+                    let curL = linear(flag, begin[attr], duration, change[attr]);
+                    box.style[attr] = curL + 'px';
+                }
+                if (flag >= duration) {
+                    clearInterval(timer);
+                    callBack();
+                }
+            }, 20)
+
+        }
+        move('box', {
+            left: 300,
+            top: 300,
+            width: 300,
+            height: 300
+        }, 2000, () => {});
+
+        function linear(t, b, d, c) {
+            /*
+            t: time 已经运动过的时候
+            b: begin 起始位置
+            d: duration 总时间
+            c: 总距离
+            */
+            return t * c / d + b;
+        }
+    
+    </script>
+</body>
+</html>

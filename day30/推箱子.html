@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        #box {
+            width: 100px;
+            height: 100px;
+            background: red;
+            position: absolute;
+            left: 400px;
+            top: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+    <script>
+        let box = document.getElementById('box');
+        window.onkeydown = function (e) {
+            let code = e.keyCode;
+            let style = getComputedStyle(box);
+            let left = parseFloat(style.left);
+            let top = parseFloat(style.top);
+            let step = 10;
+            let minL = 0;
+            let minT = 0;
+            let maxL = document.documentElement.clientWidth - box.offsetWidth;
+            let maxT = document.documentElement.clientHeight - box.offsetHeight;
+            // 上 38 下 40 左37 右39
+            switch (code) {
+                case 38:
+                    console.log('点击的是上');
+                    top -= step;
+                    break;
+                case 40:
+                    console.log('点击的是下');
+                   top += step;
+                    break;
+                case 37:
+                    console.log('点击的是左');
+                    left -= step;
+                    break;
+                case 39:
+                    console.log('点击的是右');
+                    left += step;
+                    break;
+            }
+            left<minL ? left = minL : (left > maxL ? left = maxL : null);
+               top<minT ? top = minT : (top > maxT ? top = maxT : null);
+            box.style.left = left + 'px';
+            box.style.top = top + 'px';
+        }
+
+    </script>
+</body>
+
+</html>

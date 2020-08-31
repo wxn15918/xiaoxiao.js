@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 变量提升:在当前作用域下，发生在代码执行之前，var 和function
+        // var只声明不定义，function既声明有定义
+        // let和const没有变量提升
+        fn();
+        function fn(){
+            console.log(100);
+        };
+
+
+        console.log(a);// undefined
+        var a = 12;
+        console.log(a);// 12
+
+        var a = 12;// 用var创建的全局变量还会给window增加键值对
+        console.log(window.a);// 12
+        console.log('a' in window);// true
+        var a = 12;
+
+        console.log('a' in window);// true 给window增加键值对实在变量提升阶段执行的
+        console.log('b' in window);// false
+        var a = 12;
+            b = 13;
+
+
+        var name = 'zhufeng';
+        console.log(fn);// af0
+        function fn(ss){
+            console.log(ss);// af1
+            function ss(){
+               
+            };
+            console.log(ss);// af1
+        };
+        fn(name);
+
+        var a = b = c = 12;// 相当于
+        var a = 12;
+        b = 12;
+        c = 12;
+
+        var a,b,c = 12;// 相当于
+        var a;
+        var b;
+        var c = 12;
+
+        var a = 12,b = 13, c = 14;// 相当于
+        var a = 12;
+        var b = 13;
+        var c = 14;
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //  1、一个url后面好多key:value，如localhost?key=val&key2=val2&key3=val3，封装一个函数 getParam(‘key’) 通过key获得相应等号后面的值，并且把此方法增加到String类的原型上（百度一面）
+   
+        
+    /*getParams:获取URL里指定的参数
+             key:是一个字符串
+          */
+          function getParams(key) {
+            let params = this.split('?')[1];
+            let paramsAry = params.split('&');
+            let obj = {};
+            for (let i = 0; i < paramsAry.length; i++) {
+                let cur = paramsAry[i];// 代表数组的每一项
+                let item = cur.split('=');
+                obj[item[0]] = item[1];
+            }
+
+            return obj[key];
+        }
+
+        String.prototype.getParams = getParams;
+        let url = 'localhost?key=val&key2=val2&key3=val3';
+        console.log(url.getParams('key3'));
+
+// - 2、编写两个方法 plus / minus 实现如下的执行效果
+
+    // let n = 10;
+    // let m = n.plus(10).minus(5);
+    // console.log(m);//=>15（10+10-5）
+
+    
+
+    
+Number.prototype.plus = function (num){
+     
+        return this + num;
+}
+Number.prototype.minus = function(num){
+    return this - num;
+}
+
+let n = 10;
+let m =n.plus(10).minus(5);
+
+console.log(m);
+
+// - 3、编写一个方法，方法可以实现找到字符中首个只出现一次的字符(推荐使用for循环 indexof lastIndexOf 函数)
+// 例如：let str = 'asdrawsd' // 找到的字符是 'r'
+let str = 'asdefhjklfgrwsd';
+function fn(str){
+    for(let i=0;i<str.length;i++){
+    if( str.indexOf(str[i]) === str.lastIndexOf(str[i])){
+       return str[i];
+    }
+}
+};
+console.log(fn(str));
+// 1、(n,m):从索引n开始截取到索引m(不包括m对应的那一项)
+//     2、(n):从索引n截取到末尾
+//     3、():克隆原数组
+//     4、传参负数的情况不用考虑，
+   
+function fn(n,m){
+      console.log( Array.prototype.slice.call(arguments,2,3));
+   }
+   fn(100,200,300,400)
+
+function fn(n){
+    console.log([].slice.apply(arguments,[2]));
+};
+fn(200,300,400,500)
+
+function fn(){
+    console.log( Array.prototype.slice.bind(arguments)())
+};
+fn(200,300,400,500)
+    </script>
+</body>
+</html>

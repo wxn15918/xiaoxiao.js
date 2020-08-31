@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .warp{
+            list-style: none;
+            box-sizing: border-box;
+            width: 460px;
+            margin: 20px auto;
+            display: flex;
+            justify-content: space-between;
+        }
+        .warp li{
+            box-sizing: border-box;
+            width: 100px;
+            height: 76px;
+            border: 1px solid red;
+        }
+        .warp li img{
+            width: 100%;
+            height: 100%;
+        }
+        .show{
+            position: absolute;
+            top: 0;
+            left: 0;
+            box-sizing: border-box;
+            width: 400px;
+            height: 300px;
+            border: 1px solid lightgray;
+        }
+        .show img{
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <ul class="warp">
+        <li><img src="img/1.jpg" alt="" big-img="img/1.jpg"></li>
+        <li><img src="img/2.jpg" alt="" big-img="img/2.jpg"></li>
+        <li><img src="img/3.jpg" alt="" big-img="img/3.jpg"></li>
+        <li><img src="img/4.jpg" alt="" big-img="img/4.jpg"></li>
+    </ul>
+   <!-- 展示的大图 -->
+    <!-- <div class="show">
+        <img src="img/1.jpg" alt="">
+    </div> 
+-->
+    <script src="./jquery-1.11.3.js"></script>
+    <script>
+        let $warp = $('.warp'),
+            $list = $warp.children('li'),
+            $body = $('body'),
+            $show = null;
+        // 计算大图的位置（鼠标在左上角）= 鼠标距离body的X(Y)值 + 15的偏移量
+            function computed(e){
+                $show.css({
+                    top:e.pageY + 15,
+                    left:e.pageX + 15
+                })
+            }
+            $list.mouseover(function(e){
+                
+                let bigImg =$(this).children('img').attr('big-img') ;// 获取当前元素下img属性名为big-img的属性值
+                
+                if(! $show){
+                    // 如果大图不存在，创建一个对应的大图并把他添加到body的末尾
+                    $body.append(`<div class="show">
+        <img src="${bigImg}" alt="">
+    </div> `);
+    $show = $('.show');
+                }
+                computed(e);
+            }).mouseout(function(e){
+                if($show){
+                    // 如果有对应的大图在鼠标移出的时候删除大图
+                    $show.remove();
+                    $show = null;
+                }
+            }).mousemove(function(e){
+                computed(e);
+            })
+    </script>
+       
+</body>
+</html>

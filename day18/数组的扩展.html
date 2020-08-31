@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // let obj = { name: 1, age: 2 }
+    let ary = [100, 200, 300, 400]
+    // for (var key in ary) {
+    //   console.log(key); // 
+    // }
+
+    // for(var value of ary){
+    //   console.log(value);
+    // }
+
+    console.log(ary.keys()); // 返回值是一个遍历器
+    for (let index of ary.keys()) {
+      console.log(index); // 每一个属性名
+    }
+
+    console.log(ary.values()); // 返回值是一个遍历器
+    for (let index of ary.values()) {
+      console.log(index); // 每一个属性值
+    }
+
+    for (let ss of ary.entries()) {
+      // console.log(ss); // [0,100]
+      console.log(index,item);
+    }
+
+
+    function fn(){
+        for(let ss of [].entries.call(arguments)){
+            console.log(ss);
+        }
+    }
+    fn(100,200,300,400)
+    // -----------------
+    // let obj = {name:1,age:12}
+    // // 只要是手动添加的都可以枚举
+    // Object.prototype.ss = 13;
+    // for(let key in obj){
+    //     console.log(key);
+    // }
+
+      // Object.assign()方法用于对象的合并
+    const target = { a: 1 };
+
+    const source1 = { b: 2 };
+
+    Object.assign(target, source1);
+    console.log(target);
+    target // {a:1, b:2, c:3}
+
+    const v1 = 'abc';
+    const v2 = 'de';
+
+    const obj = Object.assign({}, v1, v2);
+    先把v1和v2转成对象，然后在合并，当合并的时候，如果属性名一样，那下面会覆盖上面的
+   console.log(obj); // { "0": "a", "1": "b", "2": "c" }
+                      {'0':'d','1':'e'}
+                   {'0':'d','1':'e','2':'c'}
+
+        //  Object.keys() // 把可枚举的私有的的属性名放到一个数组里
+     // Object.values() // 把可枚举的私有的的属性名对应的属性值放到一个数组里
+    // Object.entries() // 把上面的结果组成一起进行输出
+
+
+   let obj = {name:1,age:2};
+    console.log(Object.keys(obj)); //  ["name", "age"]
+    console.log(Object.values(obj)); // [1,2]
+    console.log(Object.entries(obj)); // [['name',1],[age,2]]
+
+    for(var ss of Object.keys(obj)){
+        console.log(ss); // 每一个属性名
+    }
+
+    for(var ss of Object.values(obj)){
+        console.log(ss); // 每一个属性值
+    }
+
+    for(var ss of Object.entries(obj)){
+        console.log(ss); // 每一个键值对用数组进行输出
+    }
+
+    // ----------------------------
+    // 由于每一个 Symbol 值都是不相等的，这意味着 Symbol 值可以作为标识符，用于对象的属性名，就能保证不会出现同名的属性。这对于一个对象由多个模块构成的情况非常有用，能防止某一个键被不小心改写或覆盖。
+    // let obj = {
+    //   age:1,
+    
+    //   age:100
+    // }
+
+    const symbol1 = Symbol();
+    const symbol2 = Symbol();
+
+    console.log(symbol1 === symbol2); // false
+
+    // let obj = {};
+    // obj[symbol1] = 1;
+    // obj[symbol2] = 100;
+      let obj = {
+        [symbol1]:1
+      }
+
+    console.log(obj);
+    console.log(obj[symbol1]);
+    </script>
+</body>
+</html>

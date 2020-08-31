@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">999</div>
+   <div id="parent">
+    <p id="p">ppppppp</p>
+    <button id="btn">确定</button>
+   </div>
+    <script>
+        // document.createElement('标签名')
+        // document.createTextNode('内容')
+        // 父节点.appendChild(节点)：把指定的节点插入到父节点的末尾
+        // 父节点.removeChild(要溢出的节点):溢出节点
+
+        var box = 
+        document.getElementById('box');
+        var div = document.createElement('div');
+        div.innerHTML = '123';
+       // console.log(box);
+
+        var text  = document.createTextNode('888');
+        //console.log(text);
+        div.appendChild(text);
+        console.log(div);
+        box.appendChild(div);
+
+
+        btn.onclick = function (){
+            parent.removeChild(p);
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 数组的方法放到Array原型上
+        function Fn(){
+            this.say = function (){
+                console.log(100);// 100
+            };
+        };
+        Fn.prototype.sex = function(){// 往原型上拓展方法
+            console.log(200);
+        }
+        let f1 = new Fn;
+        let f2 = new Fn;
+        f1.say();// 100
+
+        let ary = [100,200,300,400];
+        // ary.push(500);// this是ary
+        // console.log(ary);
+        // 自己往Array的原型上拓展一个myPush方法
+        // 给类的原型拓展方法的时候不要和内置的方法重名
+        function myPush(value){
+            // 原型上的this一般情况下是当前实例
+            this[this.length] = value;
+            return this.length;
+        };
+        Array.prototype.myPush = myPush;
+       console.log( ary.myPush(900));;
+        console.log(ary);
+        // 如果想实现链式调用的保证当前方法的返回值是当前实例
+        let ary1 = [500,200,300,400];
+        ary1.sort(function(a,b){return a-b}).reverse().push(900)
+        console.log(ary1);
+
+        let str = 'stfg';
+        str = str.replace('s','p').split('').join('').toUpperCase()
+        console.log(str);
+    </script>
+</body>
+</html>

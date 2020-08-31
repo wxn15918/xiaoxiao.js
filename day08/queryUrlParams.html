@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+       // let url = 'https://www.baidu.com:8080/s?word=苹果&age=18&sex=boy#index';
+        // let obj = {
+        //     word:'苹果',
+        //     age:'18',
+        //     sex:'boy',
+        //     HASH:'index'
+        // }
+       //封装queryUrlParams
+       let url = 'https://www.baidu.com:8080/s?word=苹果&age=18&sex=boy#index';
+       
+       
+       function queryUrlParams(url){
+        
+         let params= url.split('?')[1];
+         let pry = params.split('#');
+         let lastUrl = pry[1];
+         let paramAry = pry[0].split('&');
+         let obj = {};
+         for(var i=0;i<paramAry.length;i++){
+            let art = paramAry[i].split('=');
+
+            obj[art[0]] =  art[1];
+
+         }
+         obj.HASH = lastUrl;
+         return obj;
+       };
+       console.log(queryUrlParams(url));
+    </script>
+</body>
+</html>

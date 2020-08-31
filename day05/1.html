@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>我是第一个</button>
+    <button>我是第二个</button>
+    <button>我是第三个</button>
+    <script>
+      
+    // 给每一个元素绑定点击事件，当点击元素的时候控制台输出当前元素的索引
+    var list = document.getElementsByTagName('button');
+    for (var i = 0; i < list.length; i++) {
+        list[i].index = i;
+      list[i].onclick = function () {
+        console.log(this.index);
+      }
+    }
+
+     
+    // 页面初始化阶段
+    // var i = 0 1 2 3
+
+    // list[0].onclick = function () {
+    //     console.log(i);
+    // }
+
+    // list[1].onclick = function () {
+    //     console.log(i);
+    // }
+
+    // list[2].onclick = function () {
+    //     console.log(i);
+    // }
+
+    // 当for循环结束之后，每一个按钮的点击事件才能绑定完成
+    // 此时用户开始点击第一个button，然后对应的函数才会执行
+     
+    </script>
+
+</body>
+</html>

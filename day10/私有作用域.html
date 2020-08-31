@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 函数执行时才会形成私有作用域
+        // 函数的创建
+        // 1、开辟一个堆内存，生成一个16进制的空间地址
+        // 2、把函数里的代码以字符串的格式存储进去
+        // 3、把当前堆内存的空间地址返回到值存储区
+        // 函数的执行
+        // 1、开辟私有栈内存（私有作用域）
+        // 2、形参赋值
+        // 3、变量提升
+        // 4、代码从上往下执行
+        // 5、当前的栈内存（作用域）是否销毁
+
+        // var a = 12;
+        // function fn(num){
+        //     console.log(num);
+        // };
+        // fn(10);
+        // 在私有作用域里创建的变量就是私有变量
+        // var function let const
+        // 函数的形参也是私有变量（形参变量）
+        // var a  =12;
+        // let b = 12;
+        // function fn(){
+        //     var a = 13;
+        //     let b = 12;
+        //     console.log(a);// 13j
+        // };
+        // fn();
+
+
+        let num = 1;
+    let s = 2;
+    function fn() {
+      num += 1;
+       let s = 1;
+      function f() {
+        console.log(num, s);
+      }
+      return f;
+    }
+
+    let f = fn();
+    f();
+
+//     使用一个变量，先看自己有没有，如果自己有就很使用自己的
+// 如果自己没有就往上一级作用域查找，如果上一级还没有，
+// 就往上一级的上一级查找，知道找到全局为止，如果全局还没有，那就
+// 直接报错
+ 
+    </script>
+</body>
+</html>

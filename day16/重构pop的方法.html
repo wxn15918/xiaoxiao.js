@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   <script>
+       let ary = [100,200,300,400]
+       function myPop(){
+           let value = this[this.length-1];
+           this.length -= 1;
+
+           return value;
+       };
+       Array.prototype.myPop = myPop;
+       ary.myPop();
+       console.log(ary);
+   </script> 
+</body>
+</html>
