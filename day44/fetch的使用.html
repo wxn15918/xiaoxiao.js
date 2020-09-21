@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+        ajax:xhrHttpRequest
+        axios:ajax和promise的封装
+        fetch:ES6新增的请求api的方法,返回的是promise实例
+        */
+   fetch('index.json',{
+    body: '', // 如果是post请求才能使用，这是通过请求体把内容传递给服务端(如果是get请求不要写这个参数)
+
+
+
+// same-origin 是只允许同源下才可以携带
+// *omit： 不允许携带凭证
+// include ：允许跨域吓呆资源凭证
+credentials: 'include', // 是否允许携带资源凭证
+headers: { // 设置请求头
+  'user-agent': 'Mozilla/4.0 MDN Example',
+  'content-type': 'application/json'
+},
+method: 'get', // 设置请求方式
+   }).then(res=>{
+       // 不管当前fetch请求成功与否，都走成功态
+       // 想要拿到数据得写两个then
+      
+       return res.json();
+       console.log(res);
+   }).then(res=>{
+       console.log(res);
+   })
+    </script>
+</body>
+</html>
