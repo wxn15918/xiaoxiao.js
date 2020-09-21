@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    // jsonp就是利用script标签src是非同源策略的机制实现的,当发送请求的时候在地址后面拼接一个回调函数，后台返回一个字符串格式的函数执行，并且把数据放到函数执行的实参位置
+     // script标签请求回来的东西，浏览器都会把它解析成代码执行
+
+    // 通过script发送的请求都是get请求，如果是post请求就不行了
+    // 后台必须得做特殊处理
+    function get(res){
+      console.log(res);
+    }
+
+   
+    // 封装一个jsonp请求的方法
+    function jsonp(options){
+      // 动态生成一个script标签，把当前的url拼上回调函数和参数给到script的src，
+     let {url,callback,params} = options;
+     return new Promise((resolve,reject)=>{
+        // 动态生成script标签
+        let script = null;
+        script = document.createElement('script');
+        window[callback] = function(res){
+          resolve(res);
+          document.body.removeChild(script);
+          delete window[callback];
+        };
+        // 给script的src赋值，然后把标签放到body里
+        // 先处理url
+        let str = `${url}${url.includes('?') ? '&' : '?'}`; // '/list?ss=1&name=1$age=2'
+        for(let key in params){
+          str+=`${key}=${params[key]}&`
+        };
+        str+=`callback=${callback}`;
+        script.src = str;
+        document.body.appendChild(script);
+
+        // console.log(str);
+        
+     })
+    }
+
+    jsonp({
+      url:'http://127.0.0.1:8080/list?ss=1',
+      callback:'fn',
+      params:{name:1,age:2}
+    }).then(res=>{
+      console.log(res);
+    })
+    // jsonp({
+    //   url:'http://matchweb.sports.qq.com/kbs/calendar?columnId=100000',
+    //   params:{},
+    //   callback:'fn'
+    // }).then(res=>{
+    //   console.log(res);
+    // })
+
+  </script>
+  <!-- <script src="http://127.0.0.1:8080/list?callback=get"></script> -->
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 发布 订阅
+
+          // on订阅   off取消订阅   emit发布
+
+        let obj = {};
+        // obj是当前最大的存储的池子
+        // type是当前订阅的事件类型
+        // fn是订阅的方法
+        function on(obj, type, fn) {
+            if (!obj[type]) {
+                obj[type] = [];// 给当前obj新增对应类型的池子
+            }
+
+            let ary = obj[type];// 获取当前对应的池子
+
+            // 往池子里增加方法
+            if (ary.includes(fn) || typeof fn !== 'function') return;// 防止重复添加同一个事件
+            ary.push(fn);
+
+        };
+
+        // 发布
+        // obj最大的存储所有池子的对象
+        // type你要发布的类型
+        function emit(obj, type) {
+            // 通过类型拿到当前的事件池子，
+            // 循环池子，把池子里的方法依次执行
+            let ary = obj[type]; // 拿到池子
+            ary.forEach(item => {
+                if (typeof item === 'function') {
+                    item();
+                }
+
+            })
+        }
+
+        // 取消订阅
+        function off(obj, type, fn) {
+            let ary = obj[type];
+            let index = ary.indexOf(fn);
+            if (index !== -1) {
+                ary.splice(index, 1, null);
+            }
+        }
+        function fn1() { console.log('写作业'); }
+        function fn2() { console.log('吃饭'); }
+        function fn3() { console.log('睡觉'); }
+        function fn4() { console.log('做梦'); }
+
+        on(obj, 'fangxue', fn1);
+        on(obj, 'fangxue', fn1);// 不允许一个池子里有相同的方法
+        off(obj, 'fangxue', fn1)
+        off(obj, 'fangxue', true);
+
+
+        on(obj, 'fangxue', fn2);
+        on(obj, 'sleep', fn3);
+        on(obj, 'sleep', fn4);
+
+        setTimeout(() => {
+            emit(obj, 'fangxue')
+        }, 5000)
+
+        // 在promise里
+        new Promise((resolve, reject) => {
+            // resolve(); // 发布成功的事件池子的方法
+            // reject // 发布失败事件池子里的方法
+
+        }).then(() => { }, () => { }); // then执行就是往不同的事件池子里增加方法(订阅)
+
+        console.log(obj);
+    </script>
+</body>
+
+</html>

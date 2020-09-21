@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box"></div>
+    <script>
+        /* 
+        浏览器的渲染
+        Link/imh/video/audio都是异步加载信息（浏览器会分配一个新的线程只执行当前任务，主线程继续往下走），但是script|@import是同步加载的信息，当信息加载完，主线程才会继续往下走
+
+        DOM的回流和重绘
+            重绘：元素的样式改变，但是元素的大小、位置、宽高不变
+            回流：元素的大小或位置发生变化，会触发重新布局，导致READER TREE进行重新的布局和渲染
+            注意：回流一定会引发重绘，但是重绘不会引发回流
+
+        前端性能优化的几个点
+            1、放弃传统的操作DOM的时代，基于REACT、VUE写项目（特点是数据影响视图的模式，框架内部操作的是虚拟的DOM，还会进行DOM-diff的对比）
+            2、DOM操作的读写分离
+            现代版的浏览器有一个`渲染队列`机制，如果发现某一行要修改元素的样式，不会立即渲染，他要看看下一行是否还要进行元素样式的修改，如果是那就把上一次修改样式放到渲染队列里，一直持续到不是修改样式的操作为止，整体进行一次渲染引发一次回流
+
+            js中的13个盒子模型和getComputedStyle都会引发渲染队列的刷新
+
+            3、样式的集中改变
+              box.style.cssText = 'width:100px;height:100px;padding:10px'
+                或者动态增加类名
+            4、缓存布局信息
+            box.style.width = box.offsetWidth + 1 + 'px';
+            box.style.height = box.offsetHeight + 1 + 'px';
+            // 渲染两次
+            ==>
+            let w = box.offsetWidth;
+            let h = box.offsetHeight;
+            box.style.width = w + 1 + 'px';
+            box.style.height = h + 1 + 'px';
+            // 渲染一次
+
+            5、文档碎片
+            
+        */
+       box.style.width = '100px';
+       console.log(box.offsetWidth);
+       box.style.height = '100px';
+       box.style.background = 'red';
+       box.style.padding = '10px';
+       // 会触发二次渲染
+
+       box.style.width = '100px';
+       console.log(box.offsetWidth);
+       box.style.height = '100px';
+       console.log(box.offsetWidth);
+       box.style.background = 'red';
+       box.style.padding = '10px';
+       // 会触发三次渲染
+
+       box.style.width = '100px';      
+       box.style.height = '100px';       
+       box.style.background = 'red';
+       box.style.padding = '10px';
+       console.log(box.offsetWidth);
+       console.log(box.offsetWidth);
+       // 只触发一次渲染
+
+
+    </script>
+</body>
+</html>

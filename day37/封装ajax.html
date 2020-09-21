@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        (function () {
+            function Ajax(options) {
+                return new init(options);
+            }
+            let defaults = {
+                url: '',
+                method: 'GET',
+                data: null,
+                dataType: 'JSON',
+                async: true,
+                timeOut: null,
+                headers: null,
+                success: null,
+                error: null,
+                cache: true
+            }
+            function init(options) {
+                this.options = { ...defaults, ...options };
+                console.log(this.options);
+                this.send();
+
+            }
+
+            let regGet = /^(GET|DELETE|HEAD|OPTIONS)$/i;
+            Ajax.prototype = {
+                constructor: Ajax,
+                version: 1.0,
+                send() {
+                    let { method, url, async, data, cache, timeOut, headers,dataType, success,error } = this.options;
+                    
+                    let xhr = null;
+                    this.xhr = xhr = new XMLHttpRequest;
+                    // 处理data
+                    data = this.handleData();
+                    //把处理好的data拼接到url上
+                    if (data !== null && regGet.test(method)) {
+                        url += `${this.wenHao(url)}${data}`;
+                        data = null;
+                    };
+                    // 处理是否有缓存
+                    if (cache === false && regGet.test(method)) {
+                        url += `${this.wenHao(url)}_=${Math.random()}`;
+                    }
+                    xhr.open(method, url, async);
+                    // v处理请求超时
+                    timeOut !== null ? xhr.timeout = timeOut : null;
+                    // 处理请求头
+                    if (toString.call(headers) === '[object Object]') {
+                        for (let key in headers) {
+                            if (!headers.hasOwnProperty(key)) break;
+
+                            xhr.setRequestHeader(key, encodeURIComponent(headers[key]))
+                        }
+                    }
+
+                    xhr.onreadystatechange = function () {
+                       let {status,response,readyState,responseText,responseXml,statusText} = xhr;
+
+                       if(/^(2|3)\d{2}$/.test(status)){
+                           if(readyState === 4){
+                               switch(dataType.toUpperCase()){
+                                   case 'JSON':
+                                   responseText = JSON.parse(responseText);
+                                   break;
+                                   case 'XML':
+                                   responseText = responseXml;
+                                   break;
+                               }
+                               typeof success === 'function' ? success(responseText) : null;
+                           }
+                           return;
+                       }
+
+                       if(readyState === 4){
+                        typeof error === 'function' ? error(statusText,xhr) : null;
+                       }
+                    }
+
+                    xhr.send(data);
+                },
+                handleData() {
+                    let { data } = this.options;
+
+                    if (data === null || typeof data === 'string') return data;
+
+                    let str = ``;
+                    for (let key in data) {
+
+                        if (!data.hasOwnProperty(key)) break;
+                        str += `${key}=${data[key]}&`;
+                    }
+                    str = str.substring(0, str.length - 1);
+                    return str;
+                },
+                wenHao(url) {
+                    return url.indexOf('?') !== -1 ? '&' : '?';
+                }
+            };
+
+
+
+
+            init.prototype = Ajax.prototype;
+            window.ajax = Ajax;
+        })()
+
+        ajax({
+            url: 'product.json',
+            method: 'GET',
+            data: {
+                name: 'tom',
+                age: 18
+            },
+            dataType:'JSON',
+            async: true,
+            cache: false,
+            headers: {
+                aa: 1,
+                ss: 2
+            },
+            success: function (data) {
+                console.log(data);
+            },
+            error:function(){}
+        })
+    </script>
+</body>
+
+</html>

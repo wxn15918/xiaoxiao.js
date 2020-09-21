@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="btn">按钮</button>
+    <script>
+          // window上控制页面历史记录的方法
+    // window.history是一个对象，里边存储着页面的历史记录
+    // length：代表当前打开的页面的个数
+    // 在他的原型上还有几个方法
+    // back():后退一个页面
+    // forword()：前进一个页面
+    // go(number):跳转到指定的页面
+
+    // window.location:他里面存储的是控制url的一个属性或者方法
+
+    // href：代表当前的url
+    // protocol：代表当前的协议
+    // host：（域名 + 端口）
+    // hostname:（域名）
+    // port（端口）
+    // pathname（路径部分）
+    // search（请求的参数部分）
+    // assign('url')：打开页面
+    // reload():刷新当前页面
+    // replace('url'):把当前页面替换成一个新的页面(不会再history中留下历史记录)
+
+    btn.onclick = function(){
+      // window.location.href = 'http://www.baidu.com' 
+      // 如果通过修改href跳转到新的页面，会在history中新增历史记录
+      // window.location.search = 'age=11' // 给当前url设置参数，会把之前的进行覆盖
+    }
+    </script>
+</body>
+</html>

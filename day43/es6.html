@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // async返回值是成功的promise实例
+        // async function fn1(){
+        //     return 10;
+        // }
+        // console.log(fn1());
+        // fn1().then(()=>{
+        //     console.log('成功');
+        // },()=>{
+        //     console.log('失败');
+        // })
+
+        async function fn(){
+            await console.log(100);
+            // await下面的代码是异步的微任务
+            console.log(200);
+            console.log(300);
+        }
+        fn();
+        console.log(400);// 100 400 200 300
+            // async function fn(){
+            //     let res = await new Promise((resolve,reject)=>{
+            //         resolve(100)
+            //     });
+            //     console.log(res);
+            // }
+            // fn();
+            // console.log(400);// 400 100
+            // async function fn(){
+            //     // await上是同步代码
+            //     let res = await axios.get('xxxx');
+            //     console.log(res);// 从后台请求回来的数据
+            // }
+            // fn();
+            // console.log(400);// 400 xxxx
+
+             // await必须在async里边使用，await下边的代码是异步(微任务)
+
+
+    // 微任务： async await  Promise   
+    // 宏任务： 定时器  ajax请求 事件
+
+    // ----------------------------
+    // function fun1() {
+    //   console.log('func1 start');
+    //   return new Promise(resolve => {// 微任务
+    //     resolve();
+    //   });
+    // };
+
+    // function fun2() {
+    //   console.log('func2 start');
+    //   return new Promise(resolve => {
+    //     setTimeout(() => { 
+    //       resolve();
+    //     }, 10);
+    //   })
+    // };
+
+    // console.log(1);
+    // setTimeout(async () => {
+    //   console.log(2);
+    //   await fun1();
+    //   console.log(3);
+    // }, 20);
+    // for (let i = 0; i < 100000000; i++) { };
+    // console.log(4);
+    // fun1().then(() => {
+    //   console.log(5);
+    // });
+    // fun2().then(() => {
+    //   console.log(6);
+    // });
+    // setTimeout(() => {
+    //   console.log(7);
+    // }, 0);
+    // console.log(8);
+    // 1 4 func1 start func2 start  8 5 2 func1 start 3 7 6]]
+
+    // async function fn(){
+    //     console.log(1);
+    //     console.log(2);
+    //     await console.log(4);
+    //     console.log(5);
+    // }
+    // fn();
+    // console.log(3);// 1 2 4 3 5
+    </script>
+</body>
+</html>

@@ -1,0 +1,1 @@
+const {readdir,readFile,write}
