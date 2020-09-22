@@ -24,13 +24,13 @@
 
     // reduce：收敛
 
-    // let res = ary.reduce((prev,next)=>{
-    //   // prev 代表上一次return的值
-    //   // next代表当前值
-    //   console.log(prev,next);
-    //   // 100 200
-    //   // 300 300
-    //   // 600 400
+    let res = ary.reduce((prev,next)=>{
+      // prev 代表上一次return的值
+      // next代表当前值
+      console.log(prev,next);
+      // 100 200
+      // 300 300
+      // 600 400
 
     //   return prev + next
     // },0); // reduce的第二个参数代表第一次执行回调函数的时候的prev，如果不传，那第一次的prev就是数组的第一项
@@ -54,7 +54,7 @@
         let res = ary.reduce((prev,next)=>{
             return next.price * next.count + prev;
         },0)
-        console.log(res);
+        console.log(res);// 49
     </script>
 </body>
 </html>
