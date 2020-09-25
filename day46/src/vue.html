@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul id="app">
+        <li v-for='(item,index) in arr'>
+            {{index+1}}.{{item.name}}
+            <ul >
+                <li >{{index+1}}.1、{{item.color[0]}}</li>
+                <li>{{index+1}}.2、{{item.color[1]}}</li>
+            </ul>
+        </li>
+        
+    </ul>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el:'#app',
+            data:{
+                arr:  [{ name: '苹果', color: ['green', 'red'] }, { name: '草莓', color: ['black', 'white'] }, { name: '香蕉', color: ['yellow', 'pink'] }]
+            }
+        })
+    </script>
+</body>
+</html>
