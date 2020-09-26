@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <input type="checkbox" v-model='all'>全选
+        <br>
+        <span v-for='item in list'>
+            <input type="checkbox" :value='item.value' v-model='checkList'>{{item.name}}
+        </span>
+    </div>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                list: [
+                    {
+                        id: 1,
+                        name: '当当',
+                        value: 'dangdang'
+                    },
+                    {
+                        id: 2,
+                        name: '黑猫警长',
+                        value: 'heimao'
+                    },
+                    {
+                        id: 3,
+                        name: '舒克和贝塔',
+                        value: 'shuke'
+                    },
+                    {
+                        id: 4,
+                        name: '海尔兄弟',
+                        value: 'haier'
+                    }
+                ],
+                // all: false,
+                checkList: []
+            },
+            methods: {
+
+            },
+            computed: {
+                 // all就是一个属性和data中的属性是一样的，都睡被挂载到vue实例上，使用的时候也是一样的
+        // 当all所依赖的属性发生变化的时候，get函数就会重新执行
+        // 当你在视图层去改变(设置)all的值的时候，ste函数就会执行
+                all: {
+                      // 当前的依赖关系就是all依赖下边的四个小的复选框
+                    get() {
+                        console.log('变化');
+                        // all依赖于checkList的改变而改变，如果checklist的length大于等于4，那让all变成true，否则all就是false
+                        // 想改变()all的值，必须是all依赖的属性发生变化，才可以被重新计算
+
+                        // console.log(1);
+                        return this.checkList.length >= 4 ? true : false;
+                    },
+                    set(value){
+                         // 判断当前用户是全选还是全不选，如果是全选，那就把checklist的数组写满，否则就是把checklist设置为空数组
+          
+                // value就是你当前项设置的值
+                        console.log(value);
+                        if(value){
+                            // this.checkList = ['dangdang','heimao','shuke','haier'];
+                            let ary = [];
+                            this.list.forEach(item=>{
+                               ary.push(item.value)
+                            });
+                            this.checkList = ary;
+                        }else{
+                            this.checkList = []
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

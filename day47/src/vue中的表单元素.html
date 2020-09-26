@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+		单选或者复选按钮
+			1.按照 v-model 进行分组，单选框装备的数据是一个值，复选框准备的数据是一个数组
+			2.每一个框都有自己的value，谁被选中，数据值就是被选中元素的value值；相反，值是多少，对应value的元素也会被默认选中；
+	 -->
+    <div id="app">
+        <!-- 性别：<br>
+		<input type="radio" value='0' v-model.number='sex'>男
+        <input type="radio" value='1' v-model.number='sex'>女 -->
+
+        <input type="checkbox" value="ok" @change='handle' v-model='all'>全选/全不选
+        <br>
+        <span  v-for='item in demo'>
+            <input @change='checkAll' type="checkbox" :value="item.value" v-model='val'>{{item.name}}
+            
+
+           <!--  <input type="checkbox" value="dance" v-model='val'>跳舞
+            <input type="checkbox" value="read" v-model='val'>读书
+            <input type="checkbox" value="javascript" v-model='val'>编程 -->
+        </span>
+        <button @click='submit'>提交</button>
+    </div>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                sex: 0,
+                val: [],
+                all: [],
+                demo: [
+                    {
+                        value: 'song',
+                        name: '唱歌'
+                    },
+                    {
+                        value: 'dance',
+                        name: '跳舞'
+                    },
+                    {
+                        value: 'read',
+                        name: '读书'
+                    },
+                    {
+                        value: 'javascript',
+                        name: '编程'
+                    }
+
+                ]
+            },
+            methods: {
+                submit() {
+                    console.log(this.val);
+                },
+                handle() {
+                    // 第一步判断用户当前是全选还是全不选
+                    // click点击事件时在视图更新数据之前执行的，所以那时候数据还没变的
+                    // change是在数据更新之后执行的，所以这里的数据是正常的
+                    if (this.all.includes('ok')) {
+                        console.log('用户是全选');
+                        this.val = ['song', 'dance', 'read', 'javascript'];
+                    } else {
+                        this.val = [];
+                    }
+                },
+                checkAll() {
+                 // 判断当前的val里是不是全选的，如果是就往all里增加 'ok',如果不是全选的，就清空all数组
+                this.all = this.val.length >= 4 ? ['ok'] : [];
+            }
+            }
+           
+        })
+    </script>
+</body>
+
+</html>

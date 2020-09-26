@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <span>{{msg}}</span>
+        <br>
+        <button @click='add'>点击</button>
+        <input type="text" @keyup='ss'>
+    </div>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+        // 在vue中想改页面，只要关注数据层就可以了
+        let vm = new Vue({
+            el:'#app',
+            data:{
+                msg:100
+            },
+            methods:{
+                // 这里所有方法都会挂载到当前实例上
+                // data和methods中的属性不要重名
+                add(){
+                    // this是当前vue实例
+                    this.msg++;
+                },
+                ss(){
+                    console.log(333);
+                }
+            }
+        })
+    </script>
+</body>
+</html>

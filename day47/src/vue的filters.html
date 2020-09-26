@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <div id="app">
+    <!-- 管道符 当前要处理的数据会自动传递给方法，如果你手动要个方法传递参数，可以写上小括号  可以写多个处理方法，从左往右依次处理-->
+    <div>{{num1 | toFixed(5) | addZero}}</div>
+    <div>{{num2 | toFixed(5) | addZero}}</div>
+    <div>{{num3 | toFixed(5) | addZero}}</div>
+  </div>
+  <script src="../node_modules/vue/dist/vue.js"></script>
+  <script>
+    // vue中的filters
+    // 我想把页面中的数据进行小数点的省略(也展示到页面的数据进行二次处理)
+    let vm = new Vue({
+      el: '#app',
+      data: {
+        num1: 9.5,
+        num2: 3.1415926,
+        num3: 3.51
+      },
+      methods: {
+
+      },
+      filters: {
+           // 这里的方法不会放到vue实例上，所以可以和上边的同名
+        toFixed(num, val = 1) {
+          return num.toFixed(val);
+        },
+        addZero(num) {
+          return num < 10 ? '0' + num : num;
+        }
+      }
+
+    });
+  </script>
+</body>
+
+</html>

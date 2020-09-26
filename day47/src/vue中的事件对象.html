@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <button @click='fn($event,1,2)'>点击</button>
+    </div>
+   <script src="../node_modules/vue/dist/vue.js"></script> 
+   <script>
+       let vm = new Vue({
+           el:'#app',
+           data:{
+
+           },
+           methods:{
+              // 绑定事件的时候，如果想给当前函数传递实参，可以加上小括号
+        // 如果绑定的时候不加小括号，他会默认把事件对象传递过来，如果加上小括号，但是小括号里不写东西，那就没有事件对象了,
+        // 如果给函数传递参数还想要事件对象，那得拿$event进行站位,这样事件对象就不会丢了
+               fn($event,num1,num2){
+                console.log($event,num1,num2);
+               }
+           }
+       })
+   </script>
+</body>
+</html>

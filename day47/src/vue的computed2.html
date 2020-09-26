@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+       {{filterB}}
+       <br>
+       {{sum}}
+       <br>
+       <input type="text" v-model='filterB'>
+        <button @click='add'>点击</button>
+    </div>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el:'#app',
+            data:{
+                text:'你好',
+                num:1,
+                num1:10,
+                num2:20
+            },
+            methods:{
+                add(){
+                    this.num++
+                }
+            },
+            filters:{
+            },
+            computed:{
+                // filterB(){
+                //     // console.log('filterB');
+                //     // return this.text.split('').reverse().join('');
+                // }
+                 
+                filterB:{
+                    
+                    get(){
+                        return this.text.split('').reverse().join('');
+                    },
+                    set(val){
+                         // 你设置的是什么值这就是什么值
+                         // 当计算属性被设置了之后，才会执行set方法，会自动把设置的值传递个函数的第一个形参
+                        console.log(val,48);
+                    }
+                },
+                sum(){
+                    return this.num1 + this.num2;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

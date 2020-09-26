@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        #app {
+            width: 800px;
+            /* border: 1px solid red; */
+            margin: 20px auto;
+        }
+
+        ul {
+            list-style: none;
+            display: flex;
+        }
+
+        ul li {
+            border: 1px solid black;
+            width: 150px;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            font-size: 20px;
+            margin-right: 10px;
+            position: relative;
+            top: 1px
+        }
+
+        #app div {
+            width: 500px;
+            height: 300px;
+            text-align: center;
+            line-height: 300px;
+            font-size: 40px;
+            border: 1px solid black;
+            display: none;
+        }
+
+        ul li.active {
+            border-bottom-color: white;
+        }
+
+        #app div.active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">       
+        <ul>    <li :class="curIndex===index?'active':''" v-for='(item,index) in list' @click='change(index)'>{{item.title}} </li>     </ul>              
+        <div :class="curIndex===index?'active':''" v-for='(item,index) in list'>{{item.content}}</div>  </div>   
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                curIndex: 0,
+                list: [
+                    {
+                        title: '一',
+                        content: '我是一'
+                    },
+                    {
+                        title: '二',
+                        content: '我是二'
+                    },
+                    {
+                        title: '三',
+                        content: '我是三'
+                    },
+                ]
+            },
+            methods: {
+                change(index) {
+                    this.curIndex = index;
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <ul id="app">
+    <!-- <li v-for="(item,index) in arr" :ss="item">
+      {{item}}
+    </li> -->
+    <li v-for="(item,index) in ary">
+          {{index+1}}、{{item.name}}
+          <ul>
+            <li v-for="(items,indexs) in item.color">
+              {{index+1}}.{{indexs+1}}、{{items}}
+            </li>
+          </ul>
+    </li>
+  </ul>
+  <script src="../node_modules/vue/dist/vue.js"></script>
+  <script>
+    let vm = new Vue({
+      el: '#app',
+      // data:function(){ // data这块写函数也可以，函数return的对象就是存放动态数据的地方
+      //   return {
+      //     msg:100
+      //   }
+      // }
+      data: {
+        msg: 100,
+        arr: [100, 200, 300, 400],
+        ary: [
+          {
+            name: '苹果',
+            color: ['green', 'red' ]
+          },
+          {
+            name: '草莓',
+            color: ['black', 'white']
+          },
+          {
+            name: '香蕉',
+            color: ['yellow', 'pink']
+          }
+        ]
+      }
+    })
+  </script>
+</body>
+
+</html>

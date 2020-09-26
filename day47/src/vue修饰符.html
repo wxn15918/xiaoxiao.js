@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  
+</head>
+<body>
+    <div id="app">
+        <div style="width: 100px;height: 100px;background: red;" @click.self='fn1'>
+            <div @click='fn2'>
+                <div @click.stop='fn3'>
+                    center
+                </div>
+                inter
+            </div>
+            outer
+        </div>
+        <a href="https://www.baidu.com" @click.prevent.stop='fn1'>2222</a>
+        <div @click.once='fn3'>我是once</div>
+        <input type="text" @keydown.ctrl.c='fn'>
+    </div>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+        // 事件修饰符
+        // .stop:阻止事件的冒泡传播
+        // .prevent:阻止事件默认行为
+        // .once:事件只能触发一次
+        // .self:只有自己才会触发自己的事件行为
+        // .passive:修饰scroll事件，不会等到当前事件执行完，就会执行下一个事件（提高性能）
+         // 键盘的事件修饰符 (在键盘事件后直接加键名或者keyCode码，如果想增加多个，那就在后边直接写就行)
+    // .enter .tab .delete .left .right .top .bottom.....
+
+    // <input type="text" @keydown.ctrl.67="fn"> // 这是组合写法alt、shift也可以
+        let vm = new Vue({
+            el:'#app',
+            data:{
+
+            },
+            methods:{
+                fn1(){
+                    console.log('outer');
+                },
+                fn2(){
+                    console.log('inter');
+                },
+                fn3(){
+                    console.log('center');
+                },
+                fn(e){
+                    console.log(e);
+                }
+
+            }
+        })
+    </script>
+</body>
+</html>
