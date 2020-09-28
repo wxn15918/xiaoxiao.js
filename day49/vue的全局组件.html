@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h3 v-text='title'></h3>
+        <my-button>
+            <template v-slot:before><em>我是调取组件时的插槽内容</em></template>
+            <template #after> <strong>哈哈哈</strong></template>
+        </my-button>
+    </div>
+    <template id="MyButtonTemplate">
+        <div>
+            <slot name='before'></slot>
+            <button @click='fn'>组件里的按钮==={{title}}</button>
+            <slot name='after'></slot>
+
+        </div>
+    </template>
+
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+        Vue.component('my-button',{
+            template:'#MyButtonTemplate',
+            data(){
+                return {
+                    title:'珠峰哈哈哈'
+                }
+            },
+            methods:{
+                fn(){
+                    this.title = '珠峰呵呵呵'
+                }
+            }
+            
+        })
+        let vm = new Vue({
+            el:'#app',
+            data:{
+                title:'珠峰培训'
+            }
+            
+        })
+    </script>
+</body>
+</html>

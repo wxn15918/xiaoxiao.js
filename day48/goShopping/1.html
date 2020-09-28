@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css">
+</head>
+
+<body>
+    <div id="app">
+        <div class="container">
+            <div class="row">
+                <table class="table table-bordered">
+                    <!-- 表头 -->
+                    <caption class="text-center text-danger h2">
+                        板牙拖车
+                    </caption>
+                    <tr>
+                        <td>
+                            全选
+                            <input type="checkbox" v-model="checkAll" @change="changeAll" />
+                        </td>
+                        <td>商品</td>
+                        <td>单价</td>
+                        <td>数量</td>
+                        <td>小计</td>
+                        <td>操作</td>
+                    </tr>
+                    <tr v-for="(item,index) in products">
+                        <td>
+                            <input type="checkbox" v-model="item.isSelected" @change="checkOne" />
+                        </td>
+                        <td>
+                            <img :src="item.productCover" alt="" />
+                        </td>
+                        <td>{{item.productPrice}}</td>
+                        <td>
+                            <input type="number" v-model="item.productCount" max="10" min="0" />
+                        </td>
+                        <td>
+                            {{item.productCount*item.productPrice | toFixed(2)}}
+                        </td>
+                        <td>
+                            <button class="btn btn-danger" @click="remove(item.id)">
+                                删除
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="6">总计:￥{{sum()|toFixed(2)}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script src="./node_modules/axios/dist/axios.js"></script>
+    <script>
+        let ss = [
+            {
+                isSelected: true,
+                price: 10,
+                num: 2
+            },
+            {
+                isSelected: false,
+                price: 8,
+                num: 5
+            },
+            {
+                isSelected: true,
+                price: 20,
+                num: 2
+            },
+        ];
+        let res = ss.reduce((prev, next) => {
+            let flag = next.isSelected ? 1 : 0;
+            return prev + (next.num * next.price) * next.isSelected;
+            // if(next.isSelected){
+            //     return prev + next.num * next.price;
+            // }else{
+            //     return prev;
+            // }
+
+        }, 0)
+        let vm = new Vue({
+            el: '#app',
+            data: {
+                products: [],
+                checkAll: false,
+
+            },
+            created() {
+                // 生命周期函数，也就是钩子回调函数，实例创建完成，他就会执行，一般在里面进行数据的异步请求
+                this.getData();
+            },
+            methods: {
+                getData() {
+                    // this是当前vue实例
+                    axios.get('./carts.json').then(res => {
+                        this.products = res.data;
+                    })
+                },
+                remove(id) {
+                    this.products = this.products.filter(item => {
+                        return item.id !== id;
+                    })
+                },
+                sum() {
+                    return this.products.reduce((prev, next) => {
+                        return prev + (next.productPrice * next.productCount) * next.isSelected;
+                    }, 0)
+
+                },
+                changeAll() {
+                    // if(this.checkAll){
+                    this.products.forEach(item => {
+                        item.isSelected = this.checkAll
+                    })
+                    // }
+                },
+                checkOne() {
+                    this.checkAll = this.products.every(item => {
+                        return item.isSelected;
+                    })
+                }
+            },
+            filters: {
+                toFixed(value, num) {
+                    return value.toFixed(num);
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

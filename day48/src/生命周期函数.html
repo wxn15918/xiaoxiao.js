@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+  beforeCreate 创建vue实例之前
+  created  vue实例创建完成之后
+
+  beforeMount 渲染DOM之前
+  mounted  渲染DOM之后
+  // 这四个会在vue初始化的时候执行
+
+  beforeUpdate 重新渲染DOM之前
+  updated      重新渲染DOM完成
+  // 这两个会在(修改数据)视图更新更新的时候执行
+
+  beforeDestroy  销毁之前
+  destroyed      销毁之后
+  // 这两个函数会在你手动调用vm.$destroy()之后才会执行
+-->
+
+    <div id="app">
+        <!-- {{msg}} -->
+        <span id="span">{{msg}}</span>
+        {{fn()}}
+       
+    </div>
+    <script src="../node_modules/vue/dist/vue.js
+    "></script>
+    <script>
+        
+        let vm = new Vue({
+            el:'#app',
+            data:{
+                msg:100
+            },
+            // template:'<h1>{{msg}}</h1>',
+            methods:{
+                fn(){
+                    // console.log(900);
+                    // return 200;
+                }
+            },
+            beforeCreate(){
+                // 在这里啥也做不了
+                // console.log(this.fn);// undefined
+                // console.log(this.msg);// undefined
+            },
+            created(){
+                // 这个函数执行就说明vue指令已经构建完成，我们可以在这里拿到响应式的数据和methods里的方法
+                // 在治理进行数据的请求
+                // 给data中增加属性或者更改属性
+                // this.ss = 200;
+                // console.log(this.msg);
+            },
+            beforeMount(){
+                // 把dom挂载到页面之前
+                // 在这里也可以更改data里的数据
+                // 在这里改data的数据不会引起视图的刷新
+                // this.msg = 800;
+                // console.log(document.getElementById('span'));
+            },
+            mounted(){
+                // this.msg = 800;
+                // 在这里也可以更改data里的数据
+                // 在这里改data的数据会引起视图的刷新
+                // console.log(document.getElementById('span'));
+            },
+            beforeUpdate(){
+               // 他会在你视图渲染完成之后，更新data中的数据的时候，先执行这个函数
+                console.log('beforeUpdate');
+                console.log(document.getElementById('span').innerText);
+            },
+            updated(){
+                // 在数据更新完成之后执行
+                console.log('update');
+                console.log(document.getElementById('span').innerText);
+            },
+            beforeDestroy(){
+                console.log('beforeDestroy');
+            },
+            destroyed(){
+                console.log('destroy');
+            }
+
+        })
+        // vm.$mount('#app')
+        vm.$destroy()// 卸载当前vue实例
+    </script>
+</body>
+</html>
