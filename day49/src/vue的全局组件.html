@@ -6,9 +6,15 @@
     <title>Document</title>
 </head>
 <body>
+    <!-- 
+        组件的调用
+         1、双闭合标签
+         2、单闭合标签，不符合规范，调取完他下面的视图不会渲染
+     -->
     <div id="app">
         <h3 v-text='title'></h3>
         <my-button>
+            <!-- 使用插槽，如果是多个插槽，的给插槽指定名字 -->
             <template v-slot:before><em>我是调取组件时的插槽内容</em></template>
             <template #after> <strong>哈哈哈</strong></template>
         </my-button>
@@ -24,7 +30,15 @@
 
     <script src="../node_modules/vue/dist/vue.js"></script>
     <script>
+         // 全局组件 局部组件
+    // Vue.component('组件名字',组件的配置选项)
+    // 1、给组件起名字的时候，如果组件名字开头大写，那使用的时候可以不区分大小写
+    // 2、组件名字不要大写
+    // 3、如果起名字的时候是驼峰命名法，那使用的时候以index-item的形式去使用
+    // 4、组件名字可以起index-item形式，使用的时候也是这么使用
+    // 5、组件的名字不能喝h5的标签一样
         Vue.component('my-button',{
+            // 组件里必须有写template模板
             template:'#MyButtonTemplate',
             data(){
                 return {

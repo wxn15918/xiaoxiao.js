@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <style>
+        .container{
+            border: 1px solid #aaa;
+            padding:10px;
+            width: 300px;
+            margin: 20px auto;
+            box-sizing: border-box;
+        }
+        h3{
+            font-size: 16px;
+            line-height: 40px;
+            border-bottom: 1px solid red;
+            font-weight: bold;
+        }
+        .red{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+  
+    <div id="app">
+    <my-vote :title='msg' :aaa=6 class="red" style="font-size: 18px"></my-vote>
+        <my-vote title="蛋糕很好吃"></my-vote>
+        <my-vote ></my-vote>
+    </div>
+    <template id="MyVoteTe">
+        <div class="container">
+            <h3><span v-text='title'></span>
+               (<span>{{num}}</span>)</h3>
+               <!-- {{aaa}} -->
+            <vote-content :event-bus="eventBus"></vote-content>
+            <vote-button @changparent='add' :add='add' :event-bus="eventBus"></vote-button>
+            </div>
+        </div>
+    </template>
+    <template id="VoteContentTe">
+        <div class="content">
+            <p>支持人数：<span>{{supportNum}}</span></p>
+            <p>反对人数：<span>{{opposeNum}}</span></p>
+            <p>支持率：<span>{{rate}}</span></p>
+        </div>
+    </template>
+
+    <template id="VoteButtonTe">
+        <div class="footer">
+            <button type="button" class='btn btn-primary' style="margin-right: 20px;" @click="handle('ok')">支持</button>
+            <button type="button"class='btn btn-danger' style="margin-right: 20px;" @click="handle('no')">反对</button>
+        </div> 
+    </template>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+    let VoteContent = {
+        template:'#VoteContentTe',
+        data(){
+            return {
+                supportNum:0,
+                opposeNum:0
+            }
+        },
+        props:['eventBus'],
+        methods:{
+            changeNum(type){
+                if(type==='ok'){
+                    this.supportNum++;
+                }else{
+                    this.opposeNum++
+                }
+            }
+        },
+        computed:{
+          rate(){
+            let total = this.supportNum+this.opposeNum;
+            if(total===0){
+                return '0%'
+            }
+            return (this.supportNum/total*100).toFixed(2) +'%';
+          }
+        },
+        created(){
+            this.eventBus.$on('change',this.changeNum)
+        }
+    }
+    let VoteButton = {
+        template:'#VoteButtonTe',
+        data(){
+            return{
+
+            }
+        },
+        props:['add','eventBus'],
+        methods:{
+            handle(type){
+                 this.$emit('changparent',type)
+                // this.add();
+                this.eventBus.$emit('change',type)
+            }
+        }
+    }
+    let MyVote = {
+        template:'#MyVoteTe',
+        props:{
+            title:{
+                type:String,
+                default:'我是自定义的默认值'
+            },
+            aaa:{
+                type:[Number,Array]
+            }
+        },
+        data(){
+            return {
+                num:0,
+                eventBus:new Vue
+            }
+        },
+        methods:{
+            add(type){
+                this.num++;
+            }
+        },
+        components:{
+            VoteContent,
+            VoteButton
+        }
+    }
+     let vm = new Vue({
+         el:'#app',
+         data:{
+             msg:'奶茶好喝吗'
+         },
+         components:{
+             MyVote
+         }
+         
+     })
+
+     
+    </script>
+</body>
+</html>

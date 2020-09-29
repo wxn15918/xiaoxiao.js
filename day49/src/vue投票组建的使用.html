@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <style>
+        .container{
+            border: 1px solid #aaa;
+            padding:10px;
+            width: 300px;
+            margin: 20px auto;
+            box-sizing: border-box;
+        }
+        h3{
+            font-size: 16px;
+            line-height: 40px;
+            border-bottom: 1px solid red;
+            font-weight: bold;
+        }
+        .red{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+     <!-- 
+    父组件把信息传递给子组件，基于props进行传递
+    - 默认传递给子组件的属性值都是字符串类型的，如果需要传递你想要的指定的数据格式，我们要基于v-bind:实现，(他就可以从父组件的data中取值，哪怕你不想从data中取值，想川传递一个指定类型的值，也要加上v-bind)
+   -->
+    <div id="app">
+        <!-- 父传子 -->
+    <my-vote :title='msg' :aaa=6 class="red" style="font-size: 18px"></my-vote>
+        <!-- <my-vote title="蛋糕很好吃"></my-vote>
+        <my-vote ></my-vote> -->
+    </div>
+    <template id="MyVoteTemplate">
+        <div class="container">
+            <h3><span v-text='title'></span>
+               (<span>0</span>)</h3>
+               {{aaa}}
+            <vote-content></vote-content>
+            <vote-button></vote-button>
+            </div>
+        </div>
+    </template>
+    <template id="VoteContentTemplate">
+        <div class="content">
+            <p>支持人数：<span>0</span></p>
+            <p>反对人数：<span>0</span></p>
+            <p>支持率：<span>0%</span></p>
+        </div>
+    </template>
+
+    <template id="VoteButtonTemplate">
+        <div class="footer">
+            <button type="button" class='btn btn-primary' style="margin-right: 20px;">支持</button>
+            <button type="button"class='btn btn-danger'>反对</button>
+        </div> 
+    </template>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+       
+        const VoteContent = {
+            template:'#VoteContentTemplate',
+            data(){
+                return{
+
+                }
+            }
+        };
+        const VoteButton = {
+            template:'#VoteButtonTemplate',
+            data(){
+                return{
+
+                }
+            }
+        };
+        const MyVote = {
+            template:'#MyVoteTemplate',
+              // 1、在子组件中设置props来接收父组件传递过来的属性信息，：在props中注册一下就可以，接收以后的属性和data中的属性就一样了都，都会挂载到当前组件的实例上
+
+      ///2、如果父组件传递的属性名是带-的，那接收的时候要按照驼峰命名法的格式进行接收
+            // props:["title",'aaa'],
+              // 以这种形式接受父组件传递过来的属性，可以对属性的类型进行校验，如果校验不通过，页面照样可以进行渲染，但是控制台会抛出校验错误的警告，如果你想传递指定的数据类型值，那就在传递的时候加上v-bind:
+            // props:{
+            //     title:String,
+            //     aaa:[Number,Array]
+            // },
+            // 接收从组件行间传递过来的属性信息，并把属性挂载到当前实例上
+            props:{
+                title:{
+                    type:String,
+                    default:'我是设定的默认值'
+                },
+                aaa:{
+                    // 数据格式
+                    type:[Number,Array],
+                //     是否为必传，TRUE为必传
+                //     require:true
+                //     // 自定义验证规则 val传递的属性值
+                //     validator(val){
+                //        return val >= 5;
+                //     }
+                 }
+            },
+            data(){
+                return{
+
+                }
+            },
+            components:{
+                VoteContent,
+                VoteButton
+            },
+           created(){
+               // 这是vue的单向数据流,以后你的父组件更新了那你在子组件改的'哈哈'就会被覆盖
+            //    this.title = '哈哈'
+            // console.log(typeof this.aaa);
+            },
+            // beforeCreate(){
+            //     console.log('son-beforeCreate');
+            // },
+            // created(){
+            //     console.log('son-created');
+            // },
+            // beforeMount(){
+            //     console.log('son-beforeMount');
+            // },
+            // mounted(){
+            //     console.log('son-mounted');
+            // },
+            beforeUpdate(){
+                console.log('son-beforeUpdate');
+            },
+            updated(){
+                console.log('son-update');
+            }
+        };
+        let vm = new Vue({
+            el:'#app',
+            data:{
+                msg:'奶茶不好喝'
+            },
+            components:{
+                MyVote
+            },
+            // beforeCreate(){
+            //     console.log('father-beforeCreate');
+            // },
+            // created(){
+            //     console.log('father-created');
+            // },
+            // beforeMount(){
+            //     console.log('father-beforeMount');
+            // },
+            // mounted(){
+            //     console.log('father-mounted');
+            // },
+            beforeUpdate(){
+                console.log('father-beforeUpdate');
+            },
+            updated(){
+                console.log('father-update');
+            }
+        })
+        // 子组件和父组件的初始化渲染生命周期函数执行的过程
+        // father-beforeCreate -->father-created--> father-beforeMount-->(son-beforeCreate-->son-created-->son-beforeMount-->son-mounted)-->father-mounted
+        // 父组件更新data
+        // father-beforeUpdate-->son-beforeUpdate-->son-update-->father-update
+    </script>
+</body>
+</html>
