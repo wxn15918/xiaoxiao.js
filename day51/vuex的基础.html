@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        // vuex是进行公共的状态（数据）管理的
+        // 把公共的状态抽离出来，以后每一个组件都可以使用他，这个公共的状态只要他更改了，那么使用这个状态的组件都会更新
+        // 什么时候可以使用vuex
+        // 如果项目小而且组件间的关系不复杂
+        // 如果项目大而且组件之间的关系很复杂，使用vuex会让你的管理状态变得更加简单
+
+        // 1、vuex里存的状态是响应式的，vue组件中如果用到了vuex中的某个状态，vuex中的这个状态发生改变，用到这个状态的所有组件都会更新
+        // 2、vuex中的状态不能直接更改，必须通过commit一个mutations来更改，这样是方便追踪更改的历史记录
+        let vm = new Vue({
+            el:'#app',
+            
+        })
+    </script>
+</body>
+</html>

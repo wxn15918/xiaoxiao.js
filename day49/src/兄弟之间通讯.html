@@ -1,45 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
     <style>
-        .container{
+        .container {
             border: 1px solid #aaa;
-            padding:10px;
+            padding: 10px;
             width: 300px;
             margin: 20px auto;
             box-sizing: border-box;
         }
-        h3{
+
+        h3 {
             font-size: 16px;
             line-height: 40px;
             border-bottom: 1px solid red;
             font-weight: bold;
         }
-        .red{
+
+        .red {
             color: red;
         }
     </style>
 </head>
+
 <body>
-   
+
     <div id="app">
         <!-- 父传子 -->
-    <my-vote title='奶茶不好喝' class="red" style="font-size: 18px"></my-vote>
+        <my-vote title='奶茶不好喝' class="red" style="font-size: 18px"></my-vote>
         <my-vote title="蛋糕很好吃"></my-vote>
         <my-vote></my-vote>
     </div>
     <template id="MyVoteTemplate">
         <div class="container">
             <h3><span v-text='title'></span>
-               (<span>{{num}}</span>)</h3>
-               
+                (<span>{{num}}</span>)</h3>
+
             <vote-content :event-bus="eventBus"></vote-content>
-            <vote-button  @changparent='add' :event-bus="eventBus" ></vote-button>            
-            </div>
+            <vote-button @changparent='add' :event-bus="eventBus"></vote-button>
+        </div>
         </div>
     </template>
     <template id="VoteContentTemplate">
@@ -53,100 +57,102 @@
     <template id="VoteButtonTemplate">
         <div class="footer">
             <button type="button" class='btn btn-primary' style="margin-right: 20px;" @click="handle('ok')">支持</button>
-            <button type="button"class='btn btn-danger' @click="handle('no')">反对</button>
-        </div> 
+            <button type="button" class='btn btn-danger' @click="handle('no')">反对</button>
+        </div>
     </template>
     <script src="../node_modules/vue/dist/vue.js"></script>
     <script>
-       //let eventBus = new Vue;// 创建一个第三方的事件总线（第三方的对象）
-       // vue的实例身上有$emit发布和$on订阅方法
+        //let eventBus = new Vue;// 创建一个第三方的事件总线（第三方的对象）
+        // vue的实例身上有$emit发布和$on订阅方法
         const VoteContent = {
-            template:'#VoteContentTemplate',
-            data(){
-                return{
-                    supportNum:0,
-                    opposeNum:0
+            template: '#VoteContentTemplate',
+            data() {
+                return {
+                    supportNum: 0,
+                    opposeNum: 0
                 }
             },
-            props:['eventBus'],
-            methods:{
-                changeNum(type){
-                    if(type === 'ok'){
+            props: ['eventBus'],
+            methods: {
+                changeNum(type) {
+                    if (type === 'ok') {
                         this.supportNum++;
-                    }else{
+                    } else {
                         this.opposeNum++;
                     }
                 }
             },
-            computed:{
-                rate(){
+            computed: {
+                rate() {
                     let total = this.supportNum + this.opposeNum;
-                    if(total==0){
+                    if (total == 0) {
                         return '0%'
                     }
-                    return (this.supportNum/total*100).toFixed(2) + '%';
+                    return (this.supportNum / total * 100).toFixed(2) + '%';
                 }
             },
-            created(){
+            created() {
                 console.log(1);
                 // eventBus.$on('change',this.changeNum)
-                this.eventBus.$on('change',this.changeNum)
+                this.eventBus.$on('change', this.changeNum)
             }
         };
-        
+
         const VoteButton = {
-            template:'#VoteButtonTemplate',
-            data(){
-                return{
+            template: '#VoteButtonTemplate',
+            data() {
+                return {
 
                 }
             },
-            props:['add','eventBus'],
-            methods:{
-                handle(type){      
-                     this.$emit('changparent',type);                      this.eventBus.$emit('change',type);        
+            props: ['add', 'eventBus'],
+            methods: {
+                handle(type) {
+                    this.$emit('changparent', type); 
+                    this.eventBus.$emit('change', type);
                 }
             }
         };
         const MyVote = {
-            template:'#MyVoteTemplate',
-            props:{
-                title:{
-                    type:String,
-                    default:'我是设定的默认值'
-                },               
+            template: '#MyVoteTemplate',
+            props: {
+                title: {
+                    type: String,
+                    default: '我是设定的默认值'
+                },
             },
-            methods:{
-                add(type){
+            methods: {
+                add(type) {
                     this.num++;
                 }
             },
-            data(){
-                return{
-                    num:0,
-                    eventBus:new Vue
+            data() {
+                return {
+                    num: 0,
+                    eventBus: new Vue
                 }
             },
-            components:{
+            components: {
                 VoteContent,
                 VoteButton
             },
-           
-          
+
+
         };
         let vm = new Vue({
-            el:'#app',
-            data:{
-                
+            el: '#app',
+            data: {
+
             },
-            components:{
+            components: {
                 MyVote
             },
-          
-        })
-       
 
-       
+        })
+
+
+
     </script>
 </body>
+
 </html>
